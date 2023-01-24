@@ -1,3 +1,10 @@
+import { Link } from "react-router-dom";
+import "../index.css";
+
 export default function Header() {
-  return <h1>Binder</h1>;
+  return (
+    <Link to="/">
+      <h1>Binder</h1>
+    </Link>
+  );
 }
