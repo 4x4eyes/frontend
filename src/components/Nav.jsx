@@ -4,15 +4,15 @@ import "../index.css";
 export default function Nav() {
   return (
     <div className="navbar">
-      <Link>
+      <Link to="/find-matches">
         <p>Find Matches</p>
       </Link>
       <p>|</p>
-      <Link>
+      <Link to="meetups">
         <p>Meetups</p>
       </Link>
       <p>|</p>
-      <Link>
+      <Link to="messages">
         <p>Messages</p>
       </Link>
     </div>
