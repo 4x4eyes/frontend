@@ -1,11 +1,20 @@
+import { Link } from "react-router-dom";
+import "../index.css"
+
 export default function Nav() {
   return (
-    <div>
-      <p>Find Matches</p>
+    <div className="navbar">
+      <p>
+        <Link>Find Matches</Link>
+      </p>
       <p>|</p>
-      <p>Meetups</p>
+      <p>
+        <Link>Meetups</Link>
+      </p>
       <p>|</p>
-      <p>Messages</p>
+      <p>
+        <Link>Messages</Link>
+      </p>
     </div>
   );
 }
