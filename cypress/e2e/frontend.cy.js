@@ -1,3 +1,70 @@
+
+describe('login', function() {
+  function loginViaAuth0Ui(username: string, password: string) {
+    // App landing page redirects to Auth0.
+    cy.visit('/')
+  
+    // Login on Auth0.
+    cy.origin(
+      Cypress.env('auth0_domain'),
+      { args: { username, password } },
+      ({ username, password }) => {
+        cy.get('input#username').type(username)
+        cy.get('input#password').type(password, { log: false })
+        cy.contains('button[value=default]', 'Continue').click()
+      }
+    )
+  
+    // Ensure Auth0 has redirected us back to the RWA.
+    cy.url().should('equal', 'http://localhost:3000/')
+  }
+  
+  Cypress.Commands.add('loginToAuth0', (username: string, password: string) => {
+    const log = Cypress.log({
+      displayName: 'AUTH0 LOGIN',
+      message: [`🔐 Authenticating | ${username}`],
+      // @ts-ignore
+      autoEnd: false,
+    })
+    log.snapshot('before')
+  
+    cy.session(
+        `auth0-${username}`,
+        () => {
+          loginViaAuth0Ui(username, password)
+        },
+        {
+          validate: () => {
+            // Validate presence of access token in localStorage.
+            cy.wrap(localStorage)
+              .invoke('getItem', 'authAccessToken')
+              .should('exist')
+          },
+        }
+      )
+  
+    log.snapshot('after')
+    log.end()
+  })
+})
+
+
+describe('Auth0', function () {
+  beforeEach(function () {
+    cy.task('db:seed')
+    cy.intercept('POST', '/graphql').as('createBankAccount')
+    cy.loginToAuth0(
+      Cypress.env('auth0_username'),
+      Cypress.env('auth0_password')
+    )
+    cy.visit('/')
+  })
+
+  it('shows onboarding', function () {
+    cy.contains('Get Started').should('be.visible')
+  })
+})
+
 describe("root page", () => {
   // beforeEach(() => {
   //   cy.session("user", () => {
@@ -38,3 +105,4 @@ describe("root page", () => {
     cy.contains("Log In").click();
   });
 });
+
