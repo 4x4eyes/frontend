@@ -4,7 +4,7 @@ import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import Profile from "./Profile";
 
-export default function Header() {
+export default function Header({ user, isAuthenticated, isLoading }) {
   return (
     <main>
       <Link to="/">
@@ -12,7 +12,11 @@ export default function Header() {
       </Link>
       <LoginButton />
       <LogoutButton />
-      <Profile />
+      <Profile
+        user={user}
+        isAuthenticated={isAuthenticated}
+        isLoading={isLoading}
+      />
     </main>
   );
 }
