@@ -1,4 +1,4 @@
-function loginViaAuth0Ui(username: string, password: string) {
+function loginViaAuth0Ui(username, password) {
     // App landing page redirects to Auth0.
     cy.visit('/')
   
@@ -17,7 +17,7 @@ function loginViaAuth0Ui(username: string, password: string) {
     cy.url().should('equal', 'http://localhost:3000/')
   }
   
-  Cypress.Commands.add('loginToAuth0', (username: string, password: string) => {
+  Cypress.Commands.add('loginToAuth0', (username, password) => {
     const log = Cypress.log({
       displayName: 'AUTH0 LOGIN',
       message: [`🔐 Authenticating | ${username}`],
