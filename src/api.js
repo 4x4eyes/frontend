@@ -1,4 +1,3 @@
-import { editableInputTypes } from "@testing-library/user-event/dist/utils";
 import axios from "axios";
 
 const imBoardApi = axios.create({
@@ -12,8 +11,13 @@ export const getMatches = (nickname) => {
 };
 
 export const getUser = (nickname) => {
-  return imBoardApi.get(`/users/${nickname}`).then((res) => {
-    console.log(res, "<- res");
-    return res.data.user;
-  });
+  return imBoardApi
+    .get(`/users/${nickname}`)
+    .then((res) => {
+      console.log(res, "<- res");
+      return res.data.user;
+    })
+    .catch((err) => {
+      return err;
+    });
 };

@@ -8,12 +8,12 @@ const Profile = ({ user, isAuthenticated, isAuth0Loading }) => {
 
   console.log(user);
 
-  useEffect(() => {
-    getUser(user.nickname).then((userProfile) => {
-      setDataUser(userProfile);
-      console.log(dataUser, "<- dataUser");
-    });
-  }, []);
+  // useEffect(() => {
+  //   getUser(user.nickname).then((userProfile) => {
+  //     setDataUser(userProfile);
+  //     console.log(dataUser, "<- dataUser");
+  //   });
+  // }, []);
 
   if (isAuth0Loading) {
     return <div>Loading ...</div>;
