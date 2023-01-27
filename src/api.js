@@ -14,10 +14,30 @@ export const getUser = (nickname) => {
   return imBoardApi
     .get(`/users/${nickname}`)
     .then((res) => {
-      console.log(res, "<- res");
       return res.data.user;
     })
     .catch((err) => {
       return err;
     });
 };
+
+export const patchUser = (nickname, userObj) => {
+  console.log(nickname, userObj)
+  return imBoardApi.patch(`/users/${nickname}`, userObj)
+  .then((res) => {
+    
+    return res.data
+  })
+  .catch(err => console.log(err))
+}
+
+export const postUser = (userObj) => {
+  return imBoardApi.post(`/users/`)
+    .then((res) => { 
+      console.log(res.data);
+      return res.data
+    })
+    .catch((err) => { 
+      console.log(err);
+    })
+}

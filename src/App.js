@@ -12,15 +12,7 @@ function App() {
   const { user, isAuthenticated, isAuth0Loading } = useAuth0();
   const [isLoading, setIsLoading] = useState(true);
   const [dbUser, setDBUser] = useState({});
-
-  useEffect(
-    (user) => {
-      getUser(user.nickname).then((specificUser) => {
-        specificUser.status === 200 ? setDBUser(specificUser) : setDBUser({});
-      });
-    },
-    [user]
-  );
+  
 
   return (
     <BrowserRouter>
@@ -44,17 +36,12 @@ function App() {
               />
             }
           />
-          {user.nickname === dbUser.username ? (
+          {user ? (
             <Route
               path={`update-profile/${user.nickname}`}
               element={<UpdateProfile user={user} />}
             />
-          ) : (
-            <Route
-              path={`create-profile/${user.nickname}`}
-              element={<CreateUser user={user} dbUser={dbUser} />}
-            />
-          )}
+          ) : null}
         </Routes>
       </div>
     </BrowserRouter>

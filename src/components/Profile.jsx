@@ -6,7 +6,6 @@ import { getUser } from "../api";
 const Profile = ({ user, isAuthenticated, isAuth0Loading }) => {
   const [dataUser, setDataUser] = useState({});
 
-  console.log(user);
 
   // useEffect(() => {
   //   getUser(user.nickname).then((userProfile) => {
