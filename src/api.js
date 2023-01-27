@@ -32,7 +32,7 @@ export const patchUser = (nickname, userObj) => {
 }
 
 export const postUser = (userObj) => {
-  return imBoardApi.post(`/users`)
+  return imBoardApi.post(`/users`, {userObj})
     .then((res) => { 
       console.log(res.data);
       return res.data
