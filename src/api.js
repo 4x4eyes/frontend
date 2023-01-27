@@ -9,3 +9,20 @@ export const getMatches = (nickname) => {
     return res.data.matches;
   });
 };
+
+export const getUser = (nickname) => {
+  return imBoardApi
+    .get(`/users/${nickname}`)
+    .then((res) => {
+      return res.data.user;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export const getSessions = (username) => {
+  return imBoardApi.get(`/sessions/${username}`).then((res) => {
+    return res.data.sessions;
+  });
+};
