@@ -9,6 +9,7 @@ const UpdateProfile = ({ user }) => {
   const userExists = () => {
     return user.nickname === dbUser.username;
   };
+  
   useEffect(() => {
     setIsLoading(true);
     getUser(user.nickname).then((dbUser) => {
@@ -17,13 +18,15 @@ const UpdateProfile = ({ user }) => {
     setIsLoading(false);
   }, []);
 
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const formData = Object.fromEntries(form.entries());
 
     setUpdatedUser(formData);
-    if (userExists) {
+    if (userExists()) {
       setIsLoading(true);
       patchUser(user.nickname, updatedUser)
     } else {
