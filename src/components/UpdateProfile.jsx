@@ -84,8 +84,9 @@ const UpdateProfile = ({ user }) => {
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
-                  currentUser.first_name = e.target.value;
-                  return currentUser;
+                  const temp = {...currentUser}
+                  temp.first_name = e.target.value;
+                  return temp;
                 });
               }}
               name="first_name"
@@ -96,8 +97,9 @@ const UpdateProfile = ({ user }) => {
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
-                    currentUser.last_name = e.target.value;
-                    return currentUser;
+                    const temp = {... currentUser}
+                    temp.last_name = e.target.value;
+                    return temp;
                   });
                 }}
                 name="last_name"
@@ -113,8 +115,9 @@ const UpdateProfile = ({ user }) => {
                 disabled={userExists}
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
-                    currentUser.email = e.target.value;
-                    return currentUser;
+                    const temp = {...currentUser}
+                    temp.email = e.target.value;
+                    return temp;
                   });
                 }}
               />
@@ -124,8 +127,9 @@ const UpdateProfile = ({ user }) => {
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
-                    currentUser.phone_number = e.target.value;
-                    return currentUser;
+                    const temp = {...currentUser}
+                    temp.phone_number = e.target.value;
+                    return temp;
                   });
                 }}
                 name="phone_number"
@@ -137,8 +141,9 @@ const UpdateProfile = ({ user }) => {
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
-                    currentUser.dob = e.target.value;
-                    return currentUser;
+                    const temp = {...currentUser}
+                    temp.dob = e.target.value;
+                    return temp;
                   });
                 }}
                 name="dob"
@@ -151,8 +156,9 @@ const UpdateProfile = ({ user }) => {
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
-                    currentUser.street_address = e.target.value;
-                    return currentUser;
+                    const temp = {...currentUser}
+                    temp.street_address = e.target.value;
+                    return temp;
                   });
                 }}
                 name="street_address"
@@ -164,8 +170,9 @@ const UpdateProfile = ({ user }) => {
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
-                    currentUser.city = e.target.value;
-                    return currentUser;
+                    const temp = {...currentUser}
+                    temp.city = e.target.value;
+                    return temp;
                   });
                 }}
                 name="city"
@@ -177,8 +184,9 @@ const UpdateProfile = ({ user }) => {
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
-                    currentUser.post_code = e.target.value;
-                    return currentUser;
+                    const temp = {...currentUser}
+                    temp.post_code = e.target.value;
+                    return temp;
                   });
                 }}
                 name="postcode"
@@ -190,8 +198,9 @@ const UpdateProfile = ({ user }) => {
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
-                    currentUser.county = e.target.value;
-                    return currentUser;
+                    const temp = {...currentUser}
+                    temp.county = e.target.value;
+                    return temp;
                   });
                 }}
                 name="county"
@@ -203,8 +212,9 @@ const UpdateProfile = ({ user }) => {
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
-                    currentUser.country = e.target.value;
-                    return currentUser;
+                    const temp = {...currentUser}
+                    temp.country = e.target.value;
+                    return temp;
                   });
                 }}
                 name="country"
