@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-
 export default function Nav() {
   return (
     <div className="navbar">
@@ -12,7 +11,8 @@ export default function Nav() {
         <p>Meetups</p>
       </Link>
       <p>|</p>
-      <Link className="navbar__link" to="messages">
+      <Link className="navbar__link" to="/messages">
+
         <p>Messages</p>
       </Link>
     </div>

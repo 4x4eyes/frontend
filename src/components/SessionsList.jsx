@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { SessionCard } from "./SessionCard";
+
 import { getSessions } from "../api";
+import { SessionCard } from "./SessionCard";
 
 export const SessionsList = ({ user }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,10 +27,10 @@ export const SessionsList = ({ user }) => {
   return (
     <section className="sessionsList">
       <h2>{user.nickname}'s Sessions</h2>
+
       {sessions.length > 0 ? (
         <ul>
           {sessions.map((session) => {
-            console.log(session);
             return (
               <SessionCard className="sessionsList__sessionCard"
                 key={session.session_id}

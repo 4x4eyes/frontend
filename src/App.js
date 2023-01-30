@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Nav from "./components/Nav";
 import UpdateProfile from "./components/UpdateProfile";
 import UserMatchesList from "./components/UserMatchesList";
-import IndividualSession from "./components/IndividualSession";
+import { IndividualSession } from "./components/IndividualSession";
 import { SessionsList } from "./components/SessionsList";
 import CreateUser from "./components/CreateUser";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -13,7 +13,6 @@ import LoginButton from "./components/LoginButton";
 
 function App() {
   const { user, isAuthenticated, isAuth0Loading } = useAuth0();
-  const [dbUser, setDBUser] = useState({});
 
   return (
     <BrowserRouter>
@@ -28,7 +27,7 @@ function App() {
       <div>
         {isAuthenticated ? (
           <Routes>
-            <Route path="/" element={<SessionsList user={user} />} />
+            <Route path="/messages" element={<SessionsList user={user} />} />
             <Route
               path="find-matches"
               element={<UserMatchesList user={user} />}
@@ -37,7 +36,10 @@ function App() {
               path="update-profile/:username"
               element={<UpdateProfile user={user} />}
             />
-            <Route path="session/:session_id" element={<IndividualSession />} />
+            <Route
+              path="session/:session_id"
+              element={<IndividualSession user={user} />}
+            />
           </Routes>
         ) : (
           <LoginButton />
