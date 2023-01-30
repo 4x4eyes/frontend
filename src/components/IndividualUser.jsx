@@ -1,6 +1,10 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
-function IndividualUser({ match }) {
+function IndividualUser({ user, match, sessions, sessionsError, isLoading }) {
+  console.log(user, "user")
+  console.log(match, "match")
+  console.log(sessions, "sessions")  
+
   return (
     <li className="matches__match__li" key={match.username}>
         <p className="matches__match__li__p">{match.username} </p>
@@ -15,6 +19,8 @@ function IndividualUser({ match }) {
             );
           })}
         </ul>
+        { sessionsError ? <p className="error">{sessionsError}</p> : null }
+        { isLoading ? <p>Loading sessions...</p> : match.session ? <Link to={`/session/${match.session}`}>Go to chat</Link> : <Link to="/">Create Session</Link> }
     </li>
   );
 }

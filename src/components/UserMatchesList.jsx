@@ -1,36 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { getMatches } from "../api";
+import { getMatches, getSessions } from "../api";
 import IndividualUser from "./IndividualUser";
 
 export const UserMatchesList = ({ user }) => {
   const [matches, setMatches] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [sessionsError, setSessionsError] = useState("")
+  const [sessions, setSessions] = useState([])
 
   useEffect(() => {
-    setIsLoading(true);
+    setIsLoading(true)
     getMatches(user.nickname)
       .then((matchesList) => {
         setMatches(matchesList);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setError(err.msg);
-        setIsLoading(false);
-      });
-  }, [user.nickname]);
+      }).then(() => getSessions(user.nickname))
+      .then(sessionList => setSessions(sessionList)).then(() => {
+        setMatches(matches.map(match => {
+          const temp = {...match}
 
+          const matcher = sessions.filter(session => session.user_a_name === match.username || session.user_b_name === match.username)
+
+          if (matcher[0]) {
+            temp.session = matcher[0].session_id
+          } else {
+            temp.session = false;
+          }
+          return temp;
+          
+        }))
+        setIsLoading(false)
+      })
+      .catch(e => {
+      console.log(e)
+      setIsLoading(false)
+      setSessionsError(e.msg)
+      setError(e.msg)})
+    }, [])
 
   if (error) return <p className="error">{error}</p>;
   
-
-  if (isLoading) return <p className="loading">Loading...</p>;
-
-  return (
+  return isLoading ? <p className="loading">Loading...</p> : (
     <section className="matches">
       <ul>
         {matches.map((match) => {
-          return <IndividualUser className="matches__match" key={match.username} match={match} />;
+          return <IndividualUser className="matches__match" key={match.username} match={match} user={user} sessions={sessions} sessionsError={sessionsError} isLoading={isLoading}/>;
         })}
       </ul>
     </section>
