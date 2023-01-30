@@ -23,7 +23,7 @@ export const patchUser = (userObj) => {
 };
 
 export const postUser = (userObj) => {
-  return imBoardApi.post(`/users`, { userObj }).then((res) => {
+  return imBoardApi.post(`/users`, userObj).then((res) => {
     return res.data;
   });
 };

@@ -7,6 +7,7 @@ const UpdateProfile = ({ user }) => {
   const [updatedUser, setUpdatedUser] = useState({
     username: user.nickname,
     first_name: "",
+    avatar_url: user.picture,
     last_name: "",
     phone_number: "",
     street_address: "",
@@ -57,6 +58,7 @@ const UpdateProfile = ({ user }) => {
           setIsLoading(false)
         });
     } else {
+      console.log(updatedUser)
       postUser(updatedUser)
         .then((newUser) => {
           setUpdatedUser(newUser);
@@ -105,6 +107,21 @@ const UpdateProfile = ({ user }) => {
                 }}
                 name="last_name"
                 value={updatedUser.last_name}
+              />
+            </label>
+            <label>
+              Avatar URL:
+              <input
+                name="avatar_url"
+                value={updatedUser.avatar_url}
+                defaultValue={user.picture}
+                onChange={(e) => {
+                  setUpdatedUser((currentUser) => {
+                    const temp = {...currentUser}
+                    temp.avatar_url = e.target.value;
+                    return temp;
+                  });
+                }}
               />
             </label>
             <label>
@@ -186,7 +203,7 @@ const UpdateProfile = ({ user }) => {
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
                     const temp = {...currentUser}
-                    temp.post_code = e.target.value;
+                    temp.postcode = e.target.value;
                     return temp;
                   });
                 }}
