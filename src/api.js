@@ -44,3 +44,11 @@ export const getMessages = (session_id) => {
     return res.data.messages;
   });
 };
+
+export const postMessage = (session_id, author_name, message_body) => {
+  return imBoardApi
+    .post(`/messages/${session_id}`, { author_name, message_body })
+    .then((res) => {
+      return res.data.message;
+    });
+};

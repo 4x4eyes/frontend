@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getMessages, getSessions } from "../api";
+import { getMessages, getSessions, postMessage } from "../api";
 
 export const IndividualSession = ({ user }) => {
   const { session_id } = useParams();
 
   const [messages, setMessages] = useState([]);
+  const [loadingMessages, setLoadingMessages] = useState(true);
+
   const [session, setSession] = useState();
   const [loadingSession, setLoadingSession] = useState(true);
   const [accessSession, setAccessSession] = useState(true);
-  const [loadingMessages, setLoadingMessages] = useState(true);
+
   const [err, setErr] = useState();
+
+  const [newMessageText, setNewMessageText] = useState("");
+  const [postingMessage, setPostingMessage] = useState(false);
 
   useEffect(() => {
     setAccessSession(false);
@@ -44,6 +49,20 @@ export const IndividualSession = ({ user }) => {
       });
   }, []);
 
+  const submitMessage = (event) => {
+    event.preventDefault();
+    setPostingMessage(true);
+    postMessage(session_id, user.nickname, newMessageText)
+      .then((resMessage) => {
+        setMessages((currentMessages) => [...currentMessages, resMessage]);
+        setPostingMessage(false);
+        setNewMessageText("");
+      })
+      .catch((err) => {
+        setPostingMessage(false);
+      });
+  };
+
   if (err) return <p>{err}</p>;
   if (loadingSession) return <p>Loading...</p>;
   if (!accessSession) return <p>Access Denied</p>;
@@ -71,6 +90,24 @@ export const IndividualSession = ({ user }) => {
           })}
         </ul>
       )}
+
+      <form>
+        <textarea
+          name="newMessage"
+          id="newMessage"
+          placeholder="New message ..."
+          value={newMessageText}
+          onChange={(event) => {
+            setNewMessageText(event.target.value);
+          }}
+        />
+        <button
+          disabled={postingMessage || newMessageText.length === 0}
+          onClick={submitMessage}
+        >
+          {postingMessage ? "Posting Message..." : "Submit Message"}
+        </button>
+      </form>
     </div>
   );
 };
