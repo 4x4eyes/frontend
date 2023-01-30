@@ -20,15 +20,15 @@ export const UserMatchesList = ({ user }) => {
       });
   }, [user.nickname]);
 
-  if (err) return <p>{err}</p>;
+  if (err) return <p className="error">{err}</p>;
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p className="loading">Loading...</p>;
 
   return (
-    <section>
+    <section className="matches">
       <ul>
         {matches.map((match) => {
-          return <IndividualUser key={match.username} match={match} />;
+          return <IndividualUser className="matches__match" key={match.username} match={match} />;
         })}
       </ul>
     </section>

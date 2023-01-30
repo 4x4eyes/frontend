@@ -24,14 +24,14 @@ export const SessionsList = ({ user }) => {
 
   if (isLoading) return <p>Loading...</p>;
   return (
-    <section>
+    <section className="sessionsList">
       <h2>{user.nickname}'s Sessions</h2>
       {sessions.length > 0 ? (
         <ul>
           {sessions.map((session) => {
             console.log(session);
             return (
-              <SessionCard
+              <SessionCard className="sessionsList__sessionCard"
                 key={session.session_id}
                 sessionPair={
                   user.nickname === session.user_a_name
