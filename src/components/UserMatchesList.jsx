@@ -5,7 +5,7 @@ import IndividualUser from "./IndividualUser";
 export const UserMatchesList = ({ user }) => {
   const [matches, setMatches] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [err, setErr] = useState();
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -15,12 +15,12 @@ export const UserMatchesList = ({ user }) => {
         setIsLoading(false);
       })
       .catch((err) => {
-        setErr("Page not found");
+        setError(err.msg);
         setIsLoading(false);
       });
   }, [user.nickname]);
 
-  if (err) return <p>{err}</p>;
+  if (error) return <p>{error}</p>;
 
   if (isLoading) return <p>Loading...</p>;
 
