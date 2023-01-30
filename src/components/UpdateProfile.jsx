@@ -68,7 +68,7 @@ const UpdateProfile = ({ user }) => {
   };
 
   return (
-    <main className="profile">
+    <main className="UpdateProfile">
       <h1 className="profile__header">{userExists ? "Update" : "Create"} Your Profile</h1>
       <div className="profile__container">
         <img className="profile__img" src={user.picture} alt={user.username} />

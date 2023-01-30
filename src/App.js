@@ -10,6 +10,7 @@ import CreateUser from "./components/CreateUser";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUser } from "./api";
 import LoginButton from "./components/LoginButton";
+import Profile from "./components/Profile";
 
 function App() {
   const { user, isAuthenticated, isAuth0Loading } = useAuth0();
@@ -23,6 +24,11 @@ function App() {
           isAuth0Loading={isAuth0Loading}
         />
         <Nav />
+        <Profile className="profile-container"
+        user={user}
+        isAuthenticated={isAuthenticated}
+        isAuth0Loading={isAuth0Loading}
+      />
       </div>
       <div>
         {isAuthenticated ? (
@@ -41,9 +47,7 @@ function App() {
               element={<IndividualSession user={user} />}
             />
           </Routes>
-        ) : (
-          <LoginButton />
-        )}
+        ) : null}
       </div>
     </BrowserRouter>
   );
