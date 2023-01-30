@@ -18,12 +18,12 @@ const Profile = ({ user, isAuthenticated, isAuth0Loading }) => {
     return <div>Loading ...</div>;
   }
   return isAuthenticated ? (
-    <div>
-      <img src={user.picture} alt={user.name} />
-      <h2>{user.nickname}</h2>
-      <p>{user.email}</p>
-      <Link to={`update-profile/${user.nickname}`}>
-        <button>Update Profile</button>
+    <div className="profile">
+      <img className="profile__image" src={user.picture} alt={user.name} />
+      <h2 className="profile__username">{user.nickname}</h2>
+      <p className="profile__email">{user.email}</p>
+      <Link className="profile__updateProfile" to={`update-profile/${user.nickname}`}>
+        <button className="profile__updateProfile__button">Update Profile</button>
       </Link>
     </div>
   ) : null;

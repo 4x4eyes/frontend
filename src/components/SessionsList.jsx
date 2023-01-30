@@ -25,23 +25,31 @@ export const SessionsList = ({ user }) => {
 
   if (isLoading) return <p>Loading...</p>;
   return (
-    <section>
+    <section className="sessionsList">
       <h2>{user.nickname}'s Sessions</h2>
-      <ul>
-        {sessions.map((session) => {
-          return (
-            <SessionCard
-              key={session.session_id}
-              session_id={session.session_id}
-              sessionPair={
-                user.nickname === session.user_a_name
-                  ? session.user_b_name
-                  : session.user_a_name
-              }
-            />
-          );
-        })}
-      </ul>
+
+      {sessions.length > 0 ? (
+        <ul>
+          {sessions.map((session) => {
+            return (
+              <SessionCard className="sessionsList__sessionCard"
+                key={session.session_id}
+                sessionPair={
+                  user.nickname === session.user_a_name
+                    ? session.user_b_name
+                    : session.user_a_name
+                }
+                session_id={session.session_id}
+              />
+            );
+          })}
+        </ul>
+      ) : (
+        <p>
+          You currently don't have any sessions. How about trying to connect
+          with people on the Find Matches page?
+        </p>
+      )}
     </section>
   );
 };
