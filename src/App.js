@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Nav from "./components/Nav";
 import UpdateProfile from "./components/UpdateProfile";
 import UserMatchesList from "./components/UserMatchesList";
+import IndividualSession from "./components/IndividualSession";
 import { SessionsList } from "./components/SessionsList";
 import CreateUser from "./components/CreateUser";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -33,9 +34,10 @@ function App() {
               element={<UserMatchesList user={user} />}
             />
             <Route
-              path={`update-profile/${user.nickname}`}
+              path="update-profile/:username"
               element={<UpdateProfile user={user} />}
             />
+            <Route path="session/:session_id" element={<IndividualSession />} />
           </Routes>
         ) : (
           <LoginButton />
