@@ -8,14 +8,6 @@ import LogoutButton from "./LogoutButton";
 const Profile = ({ user, isAuthenticated, isAuth0Loading }) => {
   const [dataUser, setDataUser] = useState({});
 
-
-  // useEffect(() => {
-  //   getUser(user.nickname).then((userProfile) => {
-  //     setDataUser(userProfile);
-  //     console.log(dataUser, "<- dataUser");
-  //   });
-  // }, []);
-
   if (isAuth0Loading) {
     return <div>Loading ...</div>;
   }

@@ -1,14 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import UpdateProfile from "./components/UpdateProfile";
 import UserMatchesList from "./components/UserMatchesList";
 import { IndividualSession } from "./components/IndividualSession";
 import { SessionsList } from "./components/SessionsList";
-import CreateUser from "./components/CreateUser";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getUser } from "./api";
 import LoginButton from "./components/LoginButton";
 import Profile from "./components/Profile";
 
@@ -23,15 +20,16 @@ function App() {
           isAuthenticated={isAuthenticated}
           isAuth0Loading={isAuth0Loading}
         />
-        <Nav />
-        <Profile className="profile-container"
-        user={user}
-        isAuthenticated={isAuthenticated}
-        isAuth0Loading={isAuth0Loading}
-      />
       </div>
-      <div>
-        {isAuthenticated ? (
+      {isAuthenticated ? (
+        <div>
+          <Nav />
+          <Profile
+            className="profile-container"
+            user={user}
+            isAuthenticated={isAuthenticated}
+            isAuth0Loading={isAuth0Loading}
+          />
           <Routes>
             <Route path="/messages" element={<SessionsList user={user} />} />
             <Route
@@ -47,8 +45,10 @@ function App() {
               element={<IndividualSession user={user} />}
             />
           </Routes>
-        ) : null}
-      </div>
+        </div>
+      ) : (
+        <LoginButton />
+      )}
     </BrowserRouter>
   );
 }
