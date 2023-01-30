@@ -11,33 +11,19 @@ export const getMatches = (nickname) => {
 };
 
 export const getUser = (nickname) => {
-  return imBoardApi
-    .get(`/users/${nickname}`)
-    .then((res) => {
-      return res.data.user;
-    })
-    .catch((err) => {
-      return err;
-    });
+  return imBoardApi.get(`/users/${nickname}`).then((res) => {
+    return res.data.user;
+  });
 };
 
-export const patchUser = (nickname, userObj) => {
-  console.log(nickname, userObj)
-  return imBoardApi.patch(`/users/${nickname}`, userObj)
-  .then((res) => {
-    
-    return res.data
-  })
-  .catch(err => console.log(err))
-}
+export const patchUser = (userObj) => {
+  return imBoardApi.patch(`/users/${userObj.username}`, userObj).then((res) => {
+    return res.data;
+  });
+};
 
 export const postUser = (userObj) => {
-  return imBoardApi.post(`/users`, {userObj})
-    .then((res) => { 
-      console.log(res.data);
-      return res.data
-    })
-    .catch((err) => { 
-      console.log(err);
-    })
-}
+  return imBoardApi.post(`/users`, { userObj }).then((res) => {
+    return res.data;
+  });
+};

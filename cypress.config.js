@@ -6,6 +6,11 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      config.env = {
+        ...process.env,
+        ...config.env
+      }
+      return config
     },
   },
 
@@ -17,12 +22,12 @@ module.exports = defineConfig({
   },
 
   env: {
-    auth0_username: "fourbyfoureyes@yahoo.com",
-    auth0_password: "Fourx4eyesdev$",
-    auth0_domain: "httpsdev-rba1pzy2o2f8we1a.us.auth0.com",
-    auth0_audience:"https://dev-rba1pzy2o2f8we1a.us.auth0.com/api/v2/",
-    auth0_scope: "openid%20profile%20email&",
-    auth0_client_id: "K75OSESBnYEHisdJXkM6YPIF15aQyw8K",
+    auth0_username: process.env.REACT_APP_AUTH0_USERNAME,
+    auth0_password: process.env.REACT_APP_AUTH0_PASSWORD,
+    auth0_domain: process.env.REACT_APP_AUTH0_DOMAIN,
+    auth0_audience:process.env.REACT_APP_AUTH0_AUDIENCE,
+    auth0_scope: process.env.REACT_APP_AUTH0_SCOPE,
+    auth0_client_id: process.env.REACT_APP_AUTH0_CLIENTID,
   }
 
 });
