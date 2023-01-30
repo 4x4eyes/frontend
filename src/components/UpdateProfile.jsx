@@ -23,10 +23,6 @@ const UpdateProfile = ({ user }) => {
   const [userExists, setUserExists] = useState(false);
   const [error, setError] = useState("");
 
-  // const userExists = () => {
-  //   return user.nickname === dbUser.username;
-  // };
-
   useEffect(() => {
     setError("");
     setIsLoading(true);
@@ -72,17 +68,17 @@ const UpdateProfile = ({ user }) => {
   };
 
   return (
-    <main>
-      <h1>{userExists ? "Update" : "Create"} Your Profile</h1>
-      <div className="container">
-        <img src={user.picture} alt={user.username} className="item" />
+    <main className="profile">
+      <h1 className="profile__header">{userExists ? "Update" : "Create"} Your Profile</h1>
+      <div className="profile__container">
+        <img className="profile__img" src={user.picture} alt={user.username} />
 
         {!isLoading && (
-          <form onSubmit={handleSubmit} className="item">
-            <label>Username:</label>
+          <form className="profile__form" onSubmit={handleSubmit}>
+            <label className="profile__form__label">Username:</label>
             <input name="username" value={user.nickname} disabled={true} />
 
-            <label>First Name:</label>
+            <label className="profile__form__label">First Name:</label>
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
@@ -94,8 +90,8 @@ const UpdateProfile = ({ user }) => {
               name="first_name"
               value={updatedUser.first_name}
             />
-            <label>
-              Last Name:
+            <label className="profile__form__label">
+              Last Name:</label>
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
@@ -107,9 +103,9 @@ const UpdateProfile = ({ user }) => {
                 name="last_name"
                 value={updatedUser.last_name}
               />
-            </label>
-            <label>
-              Avatar URL:
+            
+            <label className="profile__form__label">
+              Avatar URL:</label>
               <input
                 name="avatar_url"
                 value={updatedUser.avatar_url}
@@ -122,9 +118,9 @@ const UpdateProfile = ({ user }) => {
                   });
                 }}
               />
-            </label>
-            <label>
-              Email:
+        
+            <label className="profile__form__label">
+              Email:</label>
               <input
                 name="email"
                 value={updatedUser.email}
@@ -138,9 +134,9 @@ const UpdateProfile = ({ user }) => {
                   });
                 }}
               />
-            </label>
-            <label>
-              Contact Number:
+            
+            <label className="profile__form__label">
+              Contact Number:</label>
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
@@ -152,9 +148,9 @@ const UpdateProfile = ({ user }) => {
                 name="phone_number"
                 value={updatedUser.phone_number}
               />
-            </label>
-            <label>
-              Date of Birth:
+          
+            <label className="profile__form__label">
+              Date of Birth:</label>
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
@@ -167,9 +163,9 @@ const UpdateProfile = ({ user }) => {
                 value={updatedUser.dob}
                 disabled={userExists}
               />
-            </label>
-            <label>
-              Street Address:
+            
+            <label className="profile__form__label">
+              Street Address:</label>
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
@@ -181,9 +177,9 @@ const UpdateProfile = ({ user }) => {
                 name="street_address"
                 value={updatedUser.street_address}
               />
-            </label>
-            <label>
-              City:{" "}
+            
+            <label className="profile__form__label">
+              City:{" "}</label>
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
@@ -195,9 +191,9 @@ const UpdateProfile = ({ user }) => {
                 name="city"
                 value={updatedUser.city}
               />
-            </label>
-            <label>
-              Postcode{" "}
+            
+            <label className="profile__form__label">
+              Postcode{" "}</label>
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
@@ -209,9 +205,9 @@ const UpdateProfile = ({ user }) => {
                 name="postcode"
                 value={updatedUser.postcode}
               />
-            </label>
-            <label>
-              County:{" "}
+            
+            <label className="profile__form__label">
+              County:{" "}</label>
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
@@ -223,9 +219,9 @@ const UpdateProfile = ({ user }) => {
                 name="county"
                 value={updatedUser.county}
               />
-            </label>
-            <label>
-              Country:
+            
+            <label className="profile__form__label">
+              Country:</label>
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
@@ -237,9 +233,9 @@ const UpdateProfile = ({ user }) => {
                 name="country"
                 value={updatedUser.country}
               />
-            </label>
-            <label>
-              Distance Radius:
+            
+            <label className="profile__form__label">
+              Distance Radius:</label>
               <input
                 onChange={(e) => {
                   setUpdatedUser((currentUser) => {
@@ -251,13 +247,13 @@ const UpdateProfile = ({ user }) => {
                 name="distance_radius"
                 value={updatedUser.distance_radius}
               />
-            </label>
+            
             <br></br>
-            <button type="submit">Submit information</button>
+            <button className="profile__form__submit" type="submit">Submit information</button>
           </form>
         )}
-        {isLoading && <p>submitting data..please wait</p>}
-        {error && <p>{error}</p>}
+        {isLoading && <p className="loading">submitting data..please wait</p>}
+        {error && <p className="error">{error}</p>}
       </div>
     </main>
   );
