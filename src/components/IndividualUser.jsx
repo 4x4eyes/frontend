@@ -1,7 +1,6 @@
 import React from "react";
 
 function IndividualUser({ key, match }) {
-  console.log(match);
   return (
     <li className="matches__match__li" key={key}>
         <p className="matches__match__li__p">{match.username} </p>
