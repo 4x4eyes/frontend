@@ -11,11 +11,12 @@ const UpdateProfile = ({ user }) => {
     phone_number: "",
     street_address: "",
     city: "",
-    post_code: "",
+    postcode: "",
     county: "",
     country: "",
     dob: "",
     email: user.email,
+    distance_radius: ""
   });
   const [dbUser, setDbUser] = useState({});
   const [userExists, setUserExists] = useState(false);
@@ -219,6 +220,20 @@ const UpdateProfile = ({ user }) => {
                 }}
                 name="country"
                 value={updatedUser.country}
+              />
+            </label>
+            <label>
+              Distance Radius:
+              <input
+                onChange={(e) => {
+                  setUpdatedUser((currentUser) => {
+                    const temp = {...currentUser}
+                    temp.distance_radius = e.target.value;
+                    return temp;
+                  });
+                }}
+                name="distance_radius"
+                value={updatedUser.distance_radius}
               />
             </label>
             <br></br>
