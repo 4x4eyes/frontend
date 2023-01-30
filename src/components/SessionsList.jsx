@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import IndividualMessage from "./IndividualMessage";
+import { SessionCard } from "./SessionCard";
 import { getSessions } from "../api";
 
 export const SessionsList = ({ user }) => {
@@ -9,7 +9,7 @@ export const SessionsList = ({ user }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    getSessions("Dave")
+    getSessions(user.nickname)
       .then((result) => {
         setSessions(result);
         setIsLoading(false);
@@ -23,18 +23,32 @@ export const SessionsList = ({ user }) => {
   if (err) return <p>{err}</p>;
 
   if (isLoading) return <p>Loading...</p>;
-  console.log(user, "<- user");
   return (
     <section>
-      <h2>{user.username}'s Sessions</h2>
-      <ul>
-        {sessions.map((session) => {
-          console.log(session);
-          return (
-            <IndividualMessage key={session.session_id} session={session} />
-          );
-        })}
-      </ul>
+      <h2>{user.nickname}'s Sessions</h2>
+      {sessions.length > 0 ? (
+        <ul>
+          {sessions.map((session) => {
+            console.log(session);
+            return (
+              <SessionCard
+                key={session.session_id}
+                sessionPair={
+                  user.nickname === session.user_a_name
+                    ? session.user_b_name
+                    : session.user_a_name
+                }
+                session_id={session.session_id}
+              />
+            );
+          })}
+        </ul>
+      ) : (
+        <p>
+          You currently don't have any sessions. How about trying to connect
+          with people on the Find Matches page?
+        </p>
+      )}
     </section>
   );
 };
