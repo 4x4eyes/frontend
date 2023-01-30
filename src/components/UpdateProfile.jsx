@@ -36,6 +36,7 @@ const UpdateProfile = ({ user }) => {
       })
       .catch((err) => {
         setUserExists(false);
+        setIsLoading(false)
         setError(err.msg);
       });
   }, []);
@@ -52,6 +53,7 @@ const UpdateProfile = ({ user }) => {
         })
         .catch((err) => {
           setError(err.msg);
+          setIsLoading(false)
         });
     } else {
       postUser(updatedUser)
@@ -62,6 +64,7 @@ const UpdateProfile = ({ user }) => {
         })
         .catch((err) => {
           setError(err.msg);
+          setIsLoading(false)
         });
     }
   };
@@ -75,7 +78,7 @@ const UpdateProfile = ({ user }) => {
         {!isLoading && (
           <form onSubmit={handleSubmit} className="item">
             <label>Username:</label>
-            <input name="username" value={user.nickname} disabled="true" />
+            <input name="username" value={user.nickname} disabled={true} />
 
             <label>First Name:</label>
             <input
@@ -107,7 +110,7 @@ const UpdateProfile = ({ user }) => {
                 name="email"
                 value={updatedUser.email}
                 defaultValue={user.email}
-                disabled="true"
+                disabled={true}
               />
             </label>
             <label>
