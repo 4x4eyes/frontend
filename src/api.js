@@ -38,3 +38,9 @@ export const getSessions = (username) => {
     return res.data.sessions;
   });
 };
+
+export const getMessages = (session_id) => {
+  return imBoardApi.get(`/messages/${session_id}`).then((res) => {
+    return res.data.messages;
+  });
+};

@@ -4,7 +4,7 @@ export const SessionCard = ({ session_id, sessionPair }) => {
   return (
     <li>
       <p>
-        <Link to={`session/${session_id}`}>{sessionPair}</Link>
+        <Link to={`/session/${session_id}`}>{sessionPair}</Link>
       </p>
     </li>
   );
