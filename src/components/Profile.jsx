@@ -13,12 +13,14 @@ const Profile = ({ user, isAuthenticated, isAuth0Loading }) => {
   }
   return isAuthenticated ? (
     <div className="profile">
-       <LogoutButton />
       <img className="profile__image" src={user.picture} alt={user.name} />
+      <div className="profile__body"> 
       <h2 className="profile__username">{user.nickname}</h2>
       <Link className="profile__updateProfile" to={`update-profile/${user.nickname}`}>
         <button className="profile__updateProfile__button">Update Profile</button>
       </Link>
+      <LogoutButton />
+      </div>
     </div>
   ) : <LoginButton />;
 };

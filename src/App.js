@@ -14,13 +14,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        <Header
-          user={user}
-          isAuthenticated={isAuthenticated}
-          isAuth0Loading={isAuth0Loading}
-        />
-      </div>
+      <Header
+        user={user}
+        isAuthenticated={isAuthenticated}
+        isAuth0Loading={isAuth0Loading}
+      />
       {isAuthenticated ? (
         <div>
           <Nav />
@@ -30,21 +28,23 @@ function App() {
             isAuthenticated={isAuthenticated}
             isAuth0Loading={isAuth0Loading}
           />
-          <Routes>
-            <Route path="/messages" element={<SessionsList user={user} />} />
-            <Route
-              path="find-matches"
-              element={<UserMatchesList user={user} />}
-            />
-            <Route
-              path="update-profile/:username"
-              element={<UpdateProfile user={user} />}
-            />
-            <Route
-              path="session/:session_id"
-              element={<IndividualSession user={user} />}
-            />
-          </Routes>
+          <main>
+            <Routes>
+              <Route path="/messages" element={<SessionsList user={user} />} />
+              <Route
+                path="find-matches"
+                element={<UserMatchesList user={user} />}
+              />
+              <Route
+                path="update-profile/:username"
+                element={<UpdateProfile user={user} />}
+              />
+              <Route
+                path="session/:session_id"
+                element={<IndividualSession user={user} />}
+              />
+            </Routes>
+          </main>
         </div>
       ) : (
         <LoginButton />
