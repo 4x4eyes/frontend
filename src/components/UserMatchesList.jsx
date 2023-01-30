@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { getMatches } from "../api";
 import IndividualUser from "./IndividualUser";
 
-export const UserMatchesList = ({ user, isLoading, setIsLoading }) => {
+export const UserMatchesList = ({ user }) => {
   const [matches, setMatches] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [err, setErr] = useState();
 
   useEffect(() => {

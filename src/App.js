@@ -1,14 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import UpdateProfile from "./components/UpdateProfile";
 import UserMatchesList from "./components/UserMatchesList";
+import { SessionsList } from "./components/SessionsList";
+import CreateUser from "./components/CreateUser";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getUser } from "./api";
+import LoginButton from "./components/LoginButton";
 
 function App() {
   const { user, isAuthenticated, isAuth0Loading } = useAuth0();
-  const [isLoading, setIsLoading] = useState(true);
+  const [dbUser, setDBUser] = useState({});
 
   return (
     <BrowserRouter>
@@ -21,24 +25,21 @@ function App() {
         <Nav />
       </div>
       <div>
-        <Routes>
-          <Route
-            path="find-matches"
-            element={
-              <UserMatchesList
-                user={user}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-              />
-            }
-          />
-          {user ? (
+        {isAuthenticated ? (
+          <Routes>
+            <Route path="/" element={<SessionsList user={user} />} />
+            <Route
+              path="find-matches"
+              element={<UserMatchesList user={user} />}
+            />
             <Route
               path={`update-profile/${user.nickname}`}
               element={<UpdateProfile user={user} />}
             />
-          ) : null}
-        </Routes>
+          </Routes>
+        ) : (
+          <LoginButton />
+        )}
       </div>
     </BrowserRouter>
   );
