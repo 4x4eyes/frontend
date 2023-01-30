@@ -21,7 +21,7 @@ export const UserMatchesList = ({ user }) => {
   }, [user.nickname]);
 
 
-  if (error) return <p className="error">{err}</p>;
+  if (error) return <p className="error">{error}</p>;
   
 
   if (isLoading) return <p className="loading">Loading...</p>;
