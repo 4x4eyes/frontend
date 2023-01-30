@@ -8,19 +8,27 @@ export const IndividualSession = ({ user }) => {
   const [messages, setMessages] = useState([]);
   const [session, setSession] = useState();
   const [loadingSession, setLoadingSession] = useState(true);
+  const [accessSession, setAccessSession] = useState(true);
   const [loadingMessages, setLoadingMessages] = useState(true);
   const [err, setErr] = useState();
 
   useEffect(() => {
+    setAccessSession(false);
     setLoadingSession(true);
-    getSessions(user.nickname).then((resSessions) => {
-      resSessions.forEach((resSession) => {
-        if (resSession.session_id == session_id) {
-          setSession(resSession);
-          setLoadingSession(false);
-        }
+    getSessions(user.nickname)
+      .then((resSessions) => {
+        resSessions.forEach((resSession) => {
+          if (resSession.session_id == session_id) {
+            setSession(resSession);
+            setAccessSession(true);
+          }
+        });
+        setLoadingSession(false);
+      })
+      .catch((err) => {
+        setErr("Page not found");
+        setLoadingSession(false);
       });
-    });
   }, []);
 
   useEffect(() => {
@@ -36,31 +44,33 @@ export const IndividualSession = ({ user }) => {
       });
   }, []);
 
+  if (err) return <p>{err}</p>;
+  if (loadingSession) return <p>Loading...</p>;
+  if (!accessSession) return <p>Access Denied</p>;
+
   return (
     <div>
-      {loadingSession ? (
+      <h3>
+        your conversation with{" "}
+        {user.nickname === session.user_a_name
+          ? session.user_b_name
+          : session.user_a_name}
+      </h3>
+
+      {loadingMessages ? (
         "Loading"
       ) : (
-        <h3>
-          your conversation with{" "}
-          {user.nickname === session.user_a_name
-            ? session.user_b_name
-            : session.user_a_name}
-        </h3>
+        <ul>
+          {messages.map((message) => {
+            return (
+              <li key={message.message_id}>
+                {message.author_name}: {message.created_at} <br />{" "}
+                {message.message_body}
+              </li>
+            );
+          })}
+        </ul>
       )}
-
-      <ul>
-        {messages.map((message) => {
-          return (
-            <li key={message.message_id}>
-              {message.author_name}: {message.created_at} <br />{" "}
-              {message.message_body}
-            </li>
-          );
-        })}
-      </ul>
-
-      
     </div>
   );
 };
