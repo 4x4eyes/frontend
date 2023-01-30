@@ -58,7 +58,6 @@ const UpdateProfile = ({ user }) => {
           setIsLoading(false)
         });
     } else {
-      console.log(updatedUser)
       postUser(updatedUser)
         .then((newUser) => {
           setUpdatedUser(newUser);
