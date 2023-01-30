@@ -110,7 +110,13 @@ const UpdateProfile = ({ user }) => {
                 name="email"
                 value={updatedUser.email}
                 defaultValue={user.email}
-                disabled={true}
+                disabled={userExists}
+                onChange={(e) => {
+                  setUpdatedUser((currentUser) => {
+                    currentUser.email = e.target.value;
+                    return currentUser;
+                  });
+                }}
               />
             </label>
             <label>
