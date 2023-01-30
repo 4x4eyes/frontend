@@ -23,6 +23,7 @@ export const getUser = (nickname) => {
 
 export const getSessions = (username) => {
   return imBoardApi.get(`/sessions/${username}`).then((res) => {
+    console.log(res.data.sessions);
     return res.data.sessions;
   });
 };

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import IndividualMessage from "./IndividualMessage";
-import { getMatches } from "../api";
+import { getSessions } from "../api";
 
-export const MessagesList = ({ user, isLoading, setIsLoading }) => {
+export const SessionsList = ({ user }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [sessions, setSessions] = useState([]);
   const [err, setErr] = useState();
 
   useEffect(() => {
     setIsLoading(true);
-    getMatches(user.username)
+    getSessions("Dave")
       .then((result) => {
         setSessions(result);
         setIsLoading(false);
@@ -22,13 +23,15 @@ export const MessagesList = ({ user, isLoading, setIsLoading }) => {
   if (err) return <p>{err}</p>;
 
   if (isLoading) return <p>Loading...</p>;
+  console.log(user, "<- user");
   return (
     <section>
-      <h2>{user.username}'s Messages</h2>
+      <h2>{user.username}'s Sessions</h2>
       <ul>
         {sessions.map((session) => {
+          console.log(session);
           return (
-            <IndividualMessage key={sessions.session_id} session={session} />
+            <IndividualMessage key={session.session_id} session={session} />
           );
         })}
       </ul>
