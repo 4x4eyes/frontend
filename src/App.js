@@ -36,7 +36,10 @@ function App() {
               path="update-profile/:username"
               element={<UpdateProfile user={user} />}
             />
-            <Route path="session/:session_id" element={<IndividualSession />} />
+            <Route
+              path="session/:session_id"
+              element={<IndividualSession user={user} />}
+            />
           </Routes>
         ) : (
           <LoginButton />
