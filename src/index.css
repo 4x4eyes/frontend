@@ -69,11 +69,11 @@ h1 {
 
 .profile {
   display: flex;
+  max-height: 5.1em;
 }
 
 .profile__image {
-  block-size: 5em;
-  object-fit: contain;
+  object-fit: scale-down;
 }
 .profile__body {
   display: flex;
