@@ -63,3 +63,13 @@ export const postMessage = (session_id, author_name, message_body) => {
       return res.data.message;
     });
 };
+
+export const getGamesByUsername = (username) => {
+  return imBoardApi
+    .get(`/users/${username}/games`)
+    .then((games) => games.data.games);
+};
+
+export const postGameByUsername = (username, game) => {
+  return imBoardApi.post(`/users/${username}/games`, game).then(() => {});
+};

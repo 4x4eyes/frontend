@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUser, patchUser, postUser } from "../api";
+import { getUser, patchUser, postUser, getGamesByUsername, postGameByUsername } from "../api";
 import "../index.css";
 
 const UpdateProfile = ({ user }) => {
@@ -22,6 +22,8 @@ const UpdateProfile = ({ user }) => {
   const [dbUser, setDbUser] = useState({});
   const [userExists, setUserExists] = useState(false);
   const [error, setError] = useState("");
+  const [game, setGame] = useState({game_name: "", category_id: null})
+  const [currentGames, setCurrentGames] = useState([]) 
 
   useEffect(() => {
     setError("");
@@ -38,6 +40,10 @@ const UpdateProfile = ({ user }) => {
         setError(err.msg);
       });
   }, []);
+
+  useEffect(() => {
+    getGamesByUsername(user.nickname).then(games => setCurrentGames(games))
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,6 +76,47 @@ const UpdateProfile = ({ user }) => {
   return (
     <main className="UpdateProfile">
       <h1 className="profile__header">{userExists ? "Update" : "Create"} Your Profile</h1>
+      <div className="postGames">
+        <p>Add new games</p>
+        <form className="postGames__form" onSubmit={(e) => {
+          console.log(game)
+          e.preventDefault();
+          postGameByUsername(user.nickname, game).then(() => {}).catch(e => console.log(e))
+        }}>
+            <label for="game_name">Game Title</label><input name="game_name" onChange={e => setGame((currentGame) => {
+              const temp = {...currentGame}
+              temp.game_name = e.target.value;
+              return temp;
+            })}/>
+            <label htmlFor="category">Game Category</label><select id="category" value={game.category_id} onChange={(e) => setGame(currentGame => {
+              const temp = {...currentGame}
+              temp.category_id = e.target.value;
+              return temp;
+            })}>
+              <option key="1" value="1">Strategy</option>
+              <option key="2" value="2">Hidden Roles</option>
+              <option key="3" value="3">Dexterity</option>
+              <option key="4" value="4">Push Your Luck</option>
+              <option key="5" value="5">Roll and Write</option>
+              <option key="6" value="6">Deck Building</option>
+              <option key="7" value="7">Engine Building</option>
+              <option key="8" value="8">Party</option>
+              <option key="9" value="9">Co-op</option>
+            </select>
+            <button type="submit">Add</button>
+        </form>
+      </div>
+      <br></br>
+      <div className="currentGames">
+        <ul className="currentGames_list">
+          {currentGames.map((game) => {
+            return <li key={game.user_game_id}>
+              <p>Title: {game.game_name}</p>
+              <p>Category: {game.category_slug}</p>  
+             </li>
+          })}
+        </ul>
+      </div>
       <div className="profile__container">
         <img className="profile__img" src={user.picture} alt={user.username} />
 
