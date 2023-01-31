@@ -83,7 +83,7 @@ export const IndividualSession = ({ user }) => {
           {messages.map((message) => {
             return (
               <li key={message.message_id}>
-                {message.author_name}: {message.created_at} <br />{" "}
+                {message.author_name}: {message.created_at.replaceAll("T", " ").replaceAll("Z", "").slice(0, -7)}<br />{" "}
                 {message.message_body}
               </li>
             );
