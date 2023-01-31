@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getUser, patchUser, postUser, getGamesByUsername, postGameByUsername } from "../api";
+import {
+  getUser,
+  patchUser,
+  postUser,
+  getGamesByUsername,
+  postGameByUsername,
+} from "../api";
 import "../index.css";
 
 const UpdateProfile = ({ user }) => {
@@ -17,13 +23,13 @@ const UpdateProfile = ({ user }) => {
     country: "",
     dob: "",
     email: user.email,
-    distance_radius: ""
+    distance_radius: "",
   });
   const [dbUser, setDbUser] = useState({});
   const [userExists, setUserExists] = useState(false);
   const [error, setError] = useState("");
-  const [game, setGame] = useState({game_name: "", category_id: null})
-  const [currentGames, setCurrentGames] = useState([]) 
+  const [game, setGame] = useState({ game_name: "", category_id: null });
+  const [currentGames, setCurrentGames] = useState([]);
 
   useEffect(() => {
     setError("");
@@ -36,14 +42,14 @@ const UpdateProfile = ({ user }) => {
       })
       .catch((err) => {
         setUserExists(false);
-        setIsLoading(false)
+        setIsLoading(false);
         setError(err.msg);
       });
   }, []);
 
   useEffect(() => {
-    getGamesByUsername(user.nickname).then(games => setCurrentGames(games))
-  }, [])
+    getGamesByUsername(user.nickname).then((games) => setCurrentGames(games));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,7 +63,7 @@ const UpdateProfile = ({ user }) => {
         })
         .catch((err) => {
           setError(err.msg);
-          setIsLoading(false)
+          setIsLoading(false);
         });
     } else {
       postUser(updatedUser)
@@ -68,52 +74,90 @@ const UpdateProfile = ({ user }) => {
         })
         .catch((err) => {
           setError(err.msg);
-          setIsLoading(false)
+          setIsLoading(false);
         });
     }
   };
 
   return (
     <main className="UpdateProfile">
-      <h1 className="profile__header">{userExists ? "Update" : "Create"} Your Profile</h1>
+      <h1 className="profile__header">
+        {userExists ? "Update" : "Create"} Your Profile
+      </h1>
       <div className="postGames">
         <p>Add new games</p>
-        <form className="postGames__form" onSubmit={(e) => {
-          console.log(game)
-          e.preventDefault();
-          postGameByUsername(user.nickname, game).then(() => {}).catch(e => console.log(e))
-        }}>
-            <label for="game_name">Game Title</label><input name="game_name" onChange={e => setGame((currentGame) => {
-              const temp = {...currentGame}
-              temp.game_name = e.target.value;
-              return temp;
-            })}/>
-            <label htmlFor="category">Game Category</label><select id="category" value={game.category_id} onChange={(e) => setGame(currentGame => {
-              const temp = {...currentGame}
-              temp.category_id = e.target.value;
-              return temp;
-            })}>
-              <option key="1" value="1">Strategy</option>
-              <option key="2" value="2">Hidden Roles</option>
-              <option key="3" value="3">Dexterity</option>
-              <option key="4" value="4">Push Your Luck</option>
-              <option key="5" value="5">Roll and Write</option>
-              <option key="6" value="6">Deck Building</option>
-              <option key="7" value="7">Engine Building</option>
-              <option key="8" value="8">Party</option>
-              <option key="9" value="9">Co-op</option>
-            </select>
-            <button type="submit">Add</button>
+        <form
+          className="postGames__form"
+          onSubmit={(e) => {
+            console.log(game);
+            e.preventDefault();
+            postGameByUsername(user.nickname, game)
+              .then(() => {})
+              .catch((e) => console.log(e));
+          }}>
+          <label for="game_name">Game Title</label>
+          <input
+            name="game_name"
+            onChange={(e) =>
+              setGame((currentGame) => {
+                const temp = { ...currentGame };
+                temp.game_name = e.target.value;
+                return temp;
+              })
+            }
+          />
+          <label htmlFor="category">Game Category</label>
+          <select
+            id="category"
+            value={game.category_id}
+            onChange={(e) =>
+              setGame((currentGame) => {
+                const temp = { ...currentGame };
+                temp.category_id = e.target.value;
+                return temp;
+              })
+            }>
+            <option key="1" value="1">
+              Strategy
+            </option>
+            <option key="2" value="2">
+              Hidden Roles
+            </option>
+            <option key="3" value="3">
+              Dexterity
+            </option>
+            <option key="4" value="4">
+              Push Your Luck
+            </option>
+            <option key="5" value="5">
+              Roll and Write
+            </option>
+            <option key="6" value="6">
+              Deck Building
+            </option>
+            <option key="7" value="7">
+              Engine Building
+            </option>
+            <option key="8" value="8">
+              Party
+            </option>
+            <option key="9" value="9">
+              Co-op
+            </option>
+          </select>
+          <button type="submit">Add</button>
         </form>
       </div>
       <br></br>
       <div className="currentGames">
         <ul className="currentGames_list">
           {currentGames.map((game) => {
-            return <li key={game.user_game_id}>
-              <p>Title: {game.game_name}</p>
-              <p>Category: {game.category_slug}</p>  
-             </li>
+            return (
+              <li key={game.user_game_id}>
+                <p>Title: {game.game_name}</p>
+                <p>Category: {game.category_slug}</p>
+              </li>
+            );
           })}
         </ul>
       </div>
@@ -129,7 +173,7 @@ const UpdateProfile = ({ user }) => {
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
-                  const temp = {...currentUser}
+                  const temp = { ...currentUser };
                   temp.first_name = e.target.value;
                   return temp;
                 });
@@ -137,166 +181,157 @@ const UpdateProfile = ({ user }) => {
               name="first_name"
               value={updatedUser.first_name}
             />
-            <label className="profile__form__label">
-              Last Name:</label>
-              <input
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {... currentUser}
-                    temp.last_name = e.target.value;
-                    return temp;
-                  });
-                }}
-                name="last_name"
-                value={updatedUser.last_name}
-              />
-            
-            <label className="profile__form__label">
-              Avatar URL:</label>
-              <input
-                name="avatar_url"
-                value={updatedUser.avatar_url}
-                defaultValue={user.picture}
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {...currentUser}
-                    temp.avatar_url = e.target.value;
-                    return temp;
-                  });
-                }}
-              />
-        
-            <label className="profile__form__label">
-              Email:</label>
-              <input
-                name="email"
-                value={updatedUser.email}
-                defaultValue={user.email}
-                disabled={userExists}
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {...currentUser}
-                    temp.email = e.target.value;
-                    return temp;
-                  });
-                }}
-              />
-            
-            <label className="profile__form__label">
-              Contact Number:</label>
-              <input
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {...currentUser}
-                    temp.phone_number = e.target.value;
-                    return temp;
-                  });
-                }}
-                name="phone_number"
-                value={updatedUser.phone_number}
-              />
-          
-            <label className="profile__form__label">
-              Date of Birth:</label>
-              <input
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {...currentUser}
-                    temp.dob = e.target.value;
-                    return temp;
-                  });
-                }}
-                name="dob"
-                value={updatedUser.dob}
-                disabled={userExists}
-              />
-            
-            <label className="profile__form__label">
-              Street Address:</label>
-              <input
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {...currentUser}
-                    temp.street_address = e.target.value;
-                    return temp;
-                  });
-                }}
-                name="street_address"
-                value={updatedUser.street_address}
-              />
-            
-            <label className="profile__form__label">
-              City:{" "}</label>
-              <input
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {...currentUser}
-                    temp.city = e.target.value;
-                    return temp;
-                  });
-                }}
-                name="city"
-                value={updatedUser.city}
-              />
-            
-            <label className="profile__form__label">
-              Postcode{" "}</label>
-              <input
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {...currentUser}
-                    temp.postcode = e.target.value;
-                    return temp;
-                  });
-                }}
-                name="postcode"
-                value={updatedUser.postcode}
-              />
-            
-            <label className="profile__form__label">
-              County:{" "}</label>
-              <input
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {...currentUser}
-                    temp.county = e.target.value;
-                    return temp;
-                  });
-                }}
-                name="county"
-                value={updatedUser.county}
-              />
-            
-            <label className="profile__form__label">
-              Country:</label>
-              <input
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {...currentUser}
-                    temp.country = e.target.value;
-                    return temp;
-                  });
-                }}
-                name="country"
-                value={updatedUser.country}
-              />
-            
-            <label className="profile__form__label">
-              Distance Radius:</label>
-              <input
-                onChange={(e) => {
-                  setUpdatedUser((currentUser) => {
-                    const temp = {...currentUser}
-                    temp.distance_radius = e.target.value;
-                    return temp;
-                  });
-                }}
-                name="distance_radius"
-                value={updatedUser.distance_radius}
-              />
-            
+            <label className="profile__form__label">Last Name:</label>
+            <input
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.last_name = e.target.value;
+                  return temp;
+                });
+              }}
+              name="last_name"
+              value={updatedUser.last_name}
+            />
+
+            <label className="profile__form__label">Avatar URL:</label>
+            <input
+              name="avatar_url"
+              value={updatedUser.avatar_url}
+              defaultValue={user.picture}
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.avatar_url = e.target.value;
+                  return temp;
+                });
+              }}
+            />
+
+            <label className="profile__form__label">Email:</label>
+            <input
+              name="email"
+              value={updatedUser.email}
+              defaultValue={user.email}
+              disabled={userExists}
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.email = e.target.value;
+                  return temp;
+                });
+              }}
+            />
+
+            <label className="profile__form__label">Contact Number:</label>
+            <input
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.phone_number = e.target.value;
+                  return temp;
+                });
+              }}
+              name="phone_number"
+              value={updatedUser.phone_number}
+            />
+
+            <label className="profile__form__label">Date of Birth:</label>
+            <input
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.dob = e.target.value;
+                  return temp;
+                });
+              }}
+              name="dob"
+              value={updatedUser.dob}
+              disabled={userExists}
+            />
+
+            <label className="profile__form__label">Street Address:</label>
+            <input
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.street_address = e.target.value;
+                  return temp;
+                });
+              }}
+              name="street_address"
+              value={updatedUser.street_address}
+            />
+
+            <label className="profile__form__label">City: </label>
+            <input
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.city = e.target.value;
+                  return temp;
+                });
+              }}
+              name="city"
+              value={updatedUser.city}
+            />
+
+            <label className="profile__form__label">Postcode </label>
+            <input
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.postcode = e.target.value;
+                  return temp;
+                });
+              }}
+              name="postcode"
+              value={updatedUser.postcode}
+            />
+
+            <label className="profile__form__label">County: </label>
+            <input
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.county = e.target.value;
+                  return temp;
+                });
+              }}
+              name="county"
+              value={updatedUser.county}
+            />
+
+            <label className="profile__form__label">Country:</label>
+            <input
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.country = e.target.value;
+                  return temp;
+                });
+              }}
+              name="country"
+              value={updatedUser.country}
+            />
+
+            <label className="profile__form__label">Distance Radius:</label>
+            <input
+              onChange={(e) => {
+                setUpdatedUser((currentUser) => {
+                  const temp = { ...currentUser };
+                  temp.distance_radius = e.target.value;
+                  return temp;
+                });
+              }}
+              name="distance_radius"
+              value={updatedUser.distance_radius}
+            />
+
             <br></br>
-            <button className="profile__form__submit" type="submit">Submit information</button>
+            <button className="profile__form__submit" type="submit">
+              Submit information
+            </button>
           </form>
         )}
         {isLoading && <p className="loading">submitting data..please wait</p>}
