@@ -47,7 +47,10 @@ function App() {
           </Routes>
         </div>
       ) : (
-        <LoginButton />
+        <main>
+          <LoginButton />
+          <p>Logged-out landing page text</p>
+        </main>
       )}
     </BrowserRouter>
   );
