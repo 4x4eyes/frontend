@@ -1,37 +1,71 @@
 import React, { useEffect, useState } from "react";
-import { getMatches } from "../api";
+import { getMatches, getSessions } from "../api";
 import IndividualUser from "./IndividualUser";
 
 export const UserMatchesList = ({ user }) => {
   const [matches, setMatches] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [sessionsError, setSessionsError] = useState("");
 
   useEffect(() => {
+    let tempMatches;
+    let tempSessions;
     setIsLoading(true);
     getMatches(user.nickname)
       .then((matchesList) => {
-        setMatches(matchesList);
+        tempMatches = matchesList;
+      })
+      .then(() => getSessions(user.nickname))
+      .then((sessionList) => {
+        tempSessions = sessionList;
+      })
+      .then(() => {
+        setMatches(() => {
+          return tempMatches.map((match) => {
+            const temp = { ...match };
+
+            const matcher = tempSessions.filter(
+              (session) =>
+                session.user_a_name === match.username ||
+                session.user_b_name === match.username
+            );
+
+            if (matcher[0]) {
+              temp.session = matcher[0].session_id;
+            } else {
+              temp.session = false;
+            }
+            return temp;
+          });
+        });
+
         setIsLoading(false);
       })
-      .catch((err) => {
-        setError(err.msg);
+      .catch((e) => {
+        console.log(e);
         setIsLoading(false);
+        setSessionsError(e.msg);
+        setError(e.msg);
       });
-  }, [user.nickname]);
+  }, []);
 
-
-  if (error) return <p className="error">{error}</p>;
-  
-
-  if (isLoading) return <p className="loading">Loading...</p>;
-
-  return (
+  return isLoading ? (
+    <p className="loading">Loading...</p>
+  ) : (
     <section className="matches">
       <ul>
-        {matches.map((match) => {
-          return <IndividualUser className="matches__match" key={match.username} match={match} />;
-        })}
+        {error ? <p>{error}</p> : null}
+        {matches.map((match) => (
+          <IndividualUser
+            className="matches__match"
+            key={match.username}
+            match={match}
+            user={user}
+            sessionsError={sessionsError}
+            isLoading={isLoading}
+          />
+        ))}
       </ul>
     </section>
   );

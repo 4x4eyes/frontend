@@ -39,6 +39,17 @@ export const getSessions = (username) => {
   });
 };
 
+export const postSession = (user_a_name, user_b_name) => {
+  return imBoardApi
+    .post(`/sessions`, {
+      user_a_name,
+      user_b_name,
+    })
+    .then((res) => {
+      return res.data;
+    });
+};
+
 export const getMessages = (session_id) => {
   return imBoardApi.get(`/messages/${session_id}`).then((res) => {
     return res.data.messages;
