@@ -27,25 +27,24 @@ export const UserMatchesList = ({ user }) => {
             temp.session = false;
           }
           return temp;
-          
         }))
-        setIsLoading(false)
+        
+      setIsLoading(false)
       })
       .catch(e => {
-      console.log(e)
+      console.log(e.msg)
       setIsLoading(false)
       setSessionsError(e.msg)
       setError(e.msg)})
     }, [])
 
-  if (error) return <p className="error">{error}</p>;
+  
   
   return isLoading ? <p className="loading">Loading...</p> : (
     <section className="matches">
       <ul>
-        {matches.map((match) => {
-          return <IndividualUser className="matches__match" key={match.username} match={match} user={user} sessions={sessions} sessionsError={sessionsError} isLoading={isLoading}/>;
-        })}
+        {error ? <p>{error}</p> : null}
+        {matches.map((match) => <IndividualUser className="matches__match" key={match.username} match={match} user={user} sessions={sessions} sessionsError={sessionsError} isLoading={isLoading}/>)}
       </ul>
     </section>
   );
