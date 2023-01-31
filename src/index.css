@@ -1,36 +1,62 @@
-
+a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  margin: 0px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #4db1df;
+  background-color: #f3f4f4;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-h1 {
-  text-align: center;
-  font-size: 3rem;
-  text-decoration: none;
+header {
+  margin: 0px;
+  background: #d79643;
 }
 
-a {
-  text-decoration: none;
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 10px;
+  background: #a2584720;
 }
+
+div {
+  margin: 0px;
+}
+
 .navbar {
   display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  padding: 0.25rem;
+
+  background: #252a30;
 }
 
 .navbar p {
+  color: #d79643;
   display: flex;
-  padding: 1rem;
+}
+h1 {
+  text-align: center;
+  margin: 0px;
+  padding: 0.25rem;
+
+  font-size: 3rem;
+  color: #f3f4f4;
+  text-decoration: none;
 }
 
 .container {
@@ -42,43 +68,26 @@ a {
 }
 
 .profile {
-  display: grid;
-  grid-template-columns: 80vw 20vw ;
-  grid-template-rows: 2vh 6vh 2vh 2vh;
-  grid-template-areas: ". logout" ". img" ". name" ". update";
+  display: flex;
+  max-height: 5.1em;
 }
 
 .profile__image {
-  grid-area: img;
-  height: 90%;
-  margin: auto;
+  object-fit: scale-down;
+}
+.profile__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile__username,
+.profile__updateProfile,
+.profile__updateProfile,
+.logout__button {
+  margin: 0.25em 0.25em;
 }
 
 .profile__username {
-  grid-area: name;
-  font-size: 0.9rem;
-  margin: auto 0;
-  text-align: center;
-}
-
-
-.profile__updateProfile {
-  grid-area: update;
-  
-}
-
-.profile__updateProfile__button {
-  width: 60%;
-  margin: auto;
-}
-
-.logout__button {
-  grid-area: logout;
-  width: 60%;
-  margin: auto;
-}
-
-
-#title {
-  display: inline;
+  font-size: 1em;
 }
