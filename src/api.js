@@ -22,13 +22,15 @@ export const getUser = (nickname) => {
 };
 
 export const patchUser = (userObj) => {
-  return imBoardApi.patch(`/users/${userObj.username}`, userObj).then((res) => {
+  const filteredObj = Object.fromEntries(Object.entries(userObj).filter(([_, value]) => value != ""));
+  return imBoardApi.patch(`/users/${filteredObj.username}`, filteredObj).then((res) => {
     return res.data;
   });
 };
 
 export const postUser = (userObj) => {
-  return imBoardApi.post(`/users`, userObj).then((res) => {
+  const filteredObj = Object.fromEntries(Object.entries(userObj).filter(([_, value]) => value != ""));
+  return imBoardApi.post(`/users`, filteredObj).then((res) => {
     return res.data;
   });
 };
