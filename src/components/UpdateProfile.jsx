@@ -322,7 +322,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
               value={updatedUser.country}
             />
 
-            <label className="profile__form__label">Distance Radius:</label>
+            <label className="profile__form__label">Distance Radius (km):</label>
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
