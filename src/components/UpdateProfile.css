@@ -1,0 +1,28 @@
+.profile__container {
+  align-content: center;
+  text-align: center;
+}
+
+.profile__form__static {
+  text-align: center;
+  max-width: fit-content;
+  margin: 0px auto;
+}
+
+.profile__form {
+  display: table;
+  text-align: center;
+  margin: 0px auto;
+}
+
+.profile_form_field,
+.profile__form__submit {
+  display: table-row;
+}
+.profile__form__label {
+  display: table-cell;
+  text-align: left;
+}
+.profile__form__input {
+  display: table-cell;
+}
