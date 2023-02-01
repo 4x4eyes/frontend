@@ -160,11 +160,9 @@ button:hover {
   text-transform: capitalize;
 }
 
-.addGame {
-  margin-left: 3px;
-}
 
-.addGame:disabled {
+
+button:disabled {
   background-color: darkgrey;
   color: grey;
   cursor: unset;
