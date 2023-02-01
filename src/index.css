@@ -19,12 +19,6 @@ code {
     monospace;
 }
 
-header {
-  margin: 0px;
-  background: #d79643;
-  text-align: center;
-  padding-top: 10px;
-}
 
 main {
   max-width: 720px;
@@ -159,20 +153,9 @@ button:hover {
   margin: auto;
 }
 
-.scrabble__letters {
-  display: inline;
-  width: 10vw;
-}
 
-.scrabble__p {
-  display: inline;
-  font-weight: bolder;
-  font-size: 10vw;
-  line-height: 10vw;
-  color: black;
-  position: relative;
-  top: -2vw;
-}
+
+
 
 .homepage__main {
   text-align: center;
