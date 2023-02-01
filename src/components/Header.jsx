@@ -5,6 +5,7 @@ export default function Header({ user, isAuthenticated, isAuth0Loading }) {
   return (
     <Link to="/">
       <header>
+        <div className="title__div">
         <img
           className="scrabble__letters"
           src="https://i.ibb.co/c3tNmhc/Scrabble-tile-I-wood.jpg"
@@ -42,6 +43,7 @@ export default function Header({ user, isAuthenticated, isAuth0Loading }) {
           src="https://i.ibb.co/YT5J8y6/Scrabble-tile-D-wood.jpg"
           alt="D"
         />
+        </div>
       </header>
     </Link>
   );
