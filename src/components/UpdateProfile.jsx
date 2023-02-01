@@ -52,13 +52,14 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
       )}
 
       <div className="currentGames">
+        <h4>Favourite Games</h4>
         <ul className="currentGames_list">
           {currentGames.map((game) => {
             return (
-              <li key={game.user_game_id}>
-                <p>Title: {game.game_name}</p>
+              <li className="game__card" key={game.user_game_id}>
                 <p className="category__slug">
-                  Category: {game.category_slug.replaceAll("-", " ")}
+                  <b>Game:</b> {game.game_name} | <b>Category:</b>{" "}
+                  {game.category_slug.replaceAll("-", " ")}
                 </p>
               </li>
             );
