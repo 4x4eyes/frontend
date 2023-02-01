@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getMessages, getSessions, postMessage } from "../api";
 
 export const IndividualSession = ({ user }) => {
@@ -83,8 +83,12 @@ export const IndividualSession = ({ user }) => {
           {messages.map((message) => {
             return (
               <li key={message.message_id}>
-                {message.author_name}: {message.created_at.replaceAll("T", " ").replaceAll("Z", "").slice(0, -7)}<br />{" "}
-                {message.message_body}
+                {message.author_name}:{" "}
+                {message.created_at
+                  .replaceAll("T", " ")
+                  .replaceAll("Z", "")
+                  .slice(0, -7)}
+                <br /> {message.message_body}
               </li>
             );
           })}
@@ -108,6 +112,9 @@ export const IndividualSession = ({ user }) => {
           {postingMessage ? "Posting Message..." : "Submit Message"}
         </button>
       </form>
+      <Link className="session__link__button" to="/messages">
+        Back to Sessions
+      </Link>
     </div>
   );
 };
