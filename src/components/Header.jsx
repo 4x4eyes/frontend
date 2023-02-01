@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../index.css";
+import "./Header.css";
 
 export default function Header({ user, isAuthenticated, isAuth0Loading }) {
   return (
