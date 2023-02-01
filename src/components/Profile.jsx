@@ -21,10 +21,7 @@ const Profile = ({
     <div className="profile">
       <div className="profile__body">
         <h2 className="profile__username">{user.nickname}</h2>
-        <Link
-          className="profile__updateProfile"
-          to={`update-profile/${user.nickname}`}
-        >
+        <Link className="profile__updateProfile" to={`/`}>
           <button className="profile__updateProfile__button">
             Update Profile
           </button>
