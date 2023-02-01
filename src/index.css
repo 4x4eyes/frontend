@@ -19,13 +19,11 @@ code {
     monospace;
 }
 
-
 main {
   max-width: 720px;
   margin: 0 auto;
   padding: 10px;
   background: #a2584720;
-
 }
 
 div {
@@ -153,21 +151,16 @@ button:hover {
   margin: auto;
 }
 
-
-
-
-
 .homepage__main {
   text-align: center;
 }
 
-.category__slug, .category__slug__p {
+.category__slug,
+.category__slug__p {
   text-transform: capitalize;
 }
 
-.addGame {
-  margin-left: 3px;
-}
+
 
 button:disabled {
   background-color: darkgrey;

@@ -1,5 +1,6 @@
 import { getGamesByUsername, postGameByUsername } from "../api";
 import { useState, useEffect } from "react";
+import "./PostGames.css";
 
 export default ({ user, setCurrentGames, setError }) => {
   const [game, setGame] = useState({ game_name: "", category_id: "1" });
@@ -10,7 +11,7 @@ export default ({ user, setCurrentGames, setError }) => {
 
   return (
     <div className="postGames">
-      <p>Add new games</p>
+      <p>Add a new Game:</p>
       <form
         className="postGames__form"
         onSubmit={(e) => {
@@ -40,6 +41,7 @@ export default ({ user, setCurrentGames, setError }) => {
             })
           }
         />
+        <br />
         <label htmlFor="category">Game Category</label>
         <select
           id="category"
