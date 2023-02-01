@@ -178,6 +178,16 @@ button:hover {
   text-align: center;
 }
 
-.category__slug {
+.category__slug, .category__slug__p {
   text-transform: capitalize;
+}
+
+.addGame {
+  margin-left: 3px;
+}
+
+.addGame:disabled {
+  background-color: darkgrey;
+  color: grey;
+  cursor: unset;
 }
