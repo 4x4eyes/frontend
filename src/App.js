@@ -23,7 +23,7 @@ function App() {
       />
       {isAuthenticated ? (
         <div>
-          <Nav />
+          {dbUser.username ? <Nav /> : null}
           <Profile
             className="profile-container"
             user={user}
@@ -38,7 +38,7 @@ function App() {
                 element={<UserMatchesList user={user} />}
               />
               <Route
-                path="update-profile/:username"
+                path="/"
                 element={
                   <UpdateProfile
                     user={user}
