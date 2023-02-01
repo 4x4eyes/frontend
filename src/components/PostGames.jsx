@@ -30,7 +30,7 @@ export default ({ user, setCurrentGames, setError }) => {
             });
         }}
       >
-        <label for="game_name">Game Title</label>
+        <label for="game_name">Game Title: </label>
         <input
           name="game_name"
           onChange={(e) =>
@@ -42,7 +42,7 @@ export default ({ user, setCurrentGames, setError }) => {
           }
         />
         <br />
-        <label htmlFor="category">Game Category</label>
+        <label htmlFor="category">Game Category: </label>
         <select
           id="category"
           value={game.category_id}

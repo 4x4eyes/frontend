@@ -3,26 +3,37 @@
   text-align: center;
 }
 
-.profile__form__static {
+.profile__inout__table{
   text-align: center;
-  max-width: fit-content;
-  margin: 0px auto;
+  table-layout: fixed;
+  width: 100%;
 }
 
-.profile__form {
-  display: table;
-  text-align: center;
-  margin: 0px auto;
+ .profile__form__label {
+  width: 50%;
 }
 
-.profile_form_field,
-.profile__form__submit {
-  display: table-row;
-}
-.profile__form__label {
-  display: table-cell;
+.profile__form__input{
   text-align: left;
 }
-.profile__form__input {
-  display: table-cell;
+
+.profile__form__static {
+  text-align: center;
+  table-layout: fixed;
+  width: 100%;
 }
+
+
+td {
+  text-align: right;
+}
+
+.profile__user__right {
+  text-align: left;
+}
+
+.profile__user__left {
+  width: 50%;
+}
+
+
