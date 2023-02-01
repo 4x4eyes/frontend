@@ -7,12 +7,7 @@ export default function Nav() {
         <p>Find Matches</p>
       </Link>
       <p>|</p>
-      <Link className="navbar__link" to="meetups">
-        <p>Meetups</p>
-      </Link>
-      <p>|</p>
       <Link className="navbar__link" to="/messages">
-
         <p>Messages</p>
       </Link>
     </div>

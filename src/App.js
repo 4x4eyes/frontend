@@ -8,9 +8,11 @@ import { SessionsList } from "./components/SessionsList";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./components/LoginButton";
 import Profile from "./components/Profile";
+import { useState } from "react";
 
 function App() {
   const { user, isAuthenticated, isAuth0Loading } = useAuth0();
+  const [dbUser, setDbUser] = useState({});
 
   return (
     <BrowserRouter>
@@ -37,7 +39,13 @@ function App() {
               />
               <Route
                 path="update-profile/:username"
-                element={<UpdateProfile user={user} />}
+                element={
+                  <UpdateProfile
+                    user={user}
+                    dbUser={dbUser}
+                    setDbUser={setDbUser}
+                  />
+                }
               />
               <Route
                 path="session/:session_id"
@@ -48,8 +56,15 @@ function App() {
         </div>
       ) : (
         <main>
-          <LoginButton />
-          <p>Logged-out landing page text</p>
+          <div className="homepage__main">
+            <h2>Welcome to I'm Board!</h2>
+            <p>A place to connect with board game lovers in your local area.</p>
+            <p>
+              Please login to connect with people in your local area. If you've
+              never visited the site before, please create an account.
+            </p>
+            <LoginButton />
+          </div>
         </main>
       )}
     </BrowserRouter>

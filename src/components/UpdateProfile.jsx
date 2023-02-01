@@ -8,7 +8,7 @@ import {
 } from "../api";
 import "../index.css";
 
-const UpdateProfile = ({ user }) => {
+const UpdateProfile = ({ user, dbUser, setDbUser }) => {
   const [isLoading, setIsLoading] = useState(null);
   const [updatedUser, setUpdatedUser] = useState({
     username: user.nickname,
@@ -25,7 +25,6 @@ const UpdateProfile = ({ user }) => {
     email: user.email,
     distance_radius: "",
   });
-  const [dbUser, setDbUser] = useState({});
   const [userExists, setUserExists] = useState(false);
   const [error, setError] = useState("");
   const [game, setGame] = useState({ game_name: "", category_id: null });
@@ -162,7 +161,11 @@ const UpdateProfile = ({ user }) => {
         </ul>
       </div>
       <div className="profile__container">
-        <img className="profile__img" src={user.picture} alt={user.username} />
+        <img
+          className="profile__img"
+          src={dbUser.avatar_url}
+          alt={user.username}
+        />
 
         {!isLoading && (
           <form className="profile__form" onSubmit={handleSubmit}>

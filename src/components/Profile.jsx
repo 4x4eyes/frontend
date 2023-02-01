@@ -5,7 +5,13 @@ import { getUser } from "../api";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 
-const Profile = ({ user, isAuthenticated, isAuth0Loading }) => {
+const Profile = ({
+  user,
+  isAuthenticated,
+  isAuth0Loading,
+  dbUser,
+  setDbUser,
+}) => {
   const [dataUser, setDataUser] = useState({});
 
   if (isAuth0Loading) {
@@ -13,16 +19,22 @@ const Profile = ({ user, isAuthenticated, isAuth0Loading }) => {
   }
   return isAuthenticated ? (
     <div className="profile">
-      <img className="profile__image" src={user.picture} alt={user.name} />
-      <div className="profile__body"> 
-      <h2 className="profile__username">{user.nickname}</h2>
-      <Link className="profile__updateProfile" to={`update-profile/${user.nickname}`}>
-        <button className="profile__updateProfile__button">Update Profile</button>
-      </Link>
-      <LogoutButton />
+      <div className="profile__body">
+        <h2 className="profile__username">{user.nickname}</h2>
+        <Link
+          className="profile__updateProfile"
+          to={`update-profile/${user.nickname}`}
+        >
+          <button className="profile__updateProfile__button">
+            Update Profile
+          </button>
+        </Link>
+        <LogoutButton />
       </div>
     </div>
-  ) : <LoginButton />;
+  ) : (
+    <LoginButton />
+  );
 };
 
 export default Profile;
