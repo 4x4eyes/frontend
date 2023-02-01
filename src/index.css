@@ -31,7 +31,7 @@ main {
   margin: 0 auto;
   padding: 10px;
   background: #a2584720;
-  height: 100vh;
+
 }
 
 div {
@@ -105,7 +105,7 @@ h1 {
 }
 
 .matches__match__li__games ul {
-  padding-left: 0;
+  padding: 0;
 }
 
 .matches__match__li {
