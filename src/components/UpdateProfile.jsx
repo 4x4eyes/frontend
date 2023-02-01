@@ -83,6 +83,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
       <h1 className="profile__header">
         {userExists ? "Update" : "Create"} Your Profile
       </h1>
+      {userExists ? null : <p>In order to access the site, please complete your profile and submit. Once done you can view your matches and access the messaging system.</p>}
       <div className="postGames">
         <p>Add new games</p>
         <form
@@ -173,10 +174,10 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
 
         {!isLoading && (
           <form className="profile__form" onSubmit={handleSubmit}>
-            <label className="profile__form__label">Username:</label>
+            <label className="profile__form__label">Username: **</label>
             <input name="username" value={user.nickname} disabled={true} />
 
-            <label className="profile__form__label">First Name:</label>
+            <label className="profile__form__label">First Name: *</label>
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
@@ -188,7 +189,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
               name="first_name"
               value={updatedUser.first_name}
             />
-            <label className="profile__form__label">Last Name:</label>
+            <label className="profile__form__label">Last Name: *</label>
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
@@ -215,7 +216,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
               }}
             />
 
-            <label className="profile__form__label">Email:</label>
+            <label className="profile__form__label">Email: *</label>
             <input
               name="email"
               value={updatedUser.email}
@@ -230,7 +231,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
               }}
             />
 
-            <label className="profile__form__label">Contact Number:</label>
+            <label className="profile__form__label">Contact Number: *</label>
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
@@ -243,7 +244,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
               value={updatedUser.phone_number}
             />
 
-            <label className="profile__form__label">Date of Birth:</label>
+            <label className="profile__form__label">Date of Birth: **</label>
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
@@ -270,7 +271,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
               value={updatedUser.street_address}
             />
 
-            <label className="profile__form__label">City: </label>
+            <label className="profile__form__label">City: *</label>
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
@@ -283,7 +284,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
               value={updatedUser.city}
             />
 
-            <label className="profile__form__label">Postcode </label>
+            <label className="profile__form__label">Postcode: </label>
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
@@ -309,7 +310,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
               value={updatedUser.county}
             />
 
-            <label className="profile__form__label">Country:</label>
+            <label className="profile__form__label">Country: *</label>
             <input
               onChange={(e) => {
                 setUpdatedUser((currentUser) => {
@@ -339,6 +340,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
             <button className="profile__form__submit" type="submit">
               Submit information
             </button>
+            <p>*: Required <br/> **: Required and cannot be changed</p>
           </form>
         )}
         {isLoading && <p className="loading">submitting data..please wait</p>}
