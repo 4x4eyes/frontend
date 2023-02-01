@@ -22,13 +22,15 @@ export const getUser = (nickname) => {
 };
 
 export const patchUser = (userObj) => {
-  return imBoardApi.patch(`/users/${userObj.username}`, userObj).then((res) => {
+  const filteredObj = Object.fromEntries(Object.entries(userObj).filter(([_, value]) => value != ""));
+  return imBoardApi.patch(`/users/${filteredObj.username}`, filteredObj).then((res) => {
     return res.data;
   });
 };
 
 export const postUser = (userObj) => {
-  return imBoardApi.post(`/users`, userObj).then((res) => {
+  const filteredObj = Object.fromEntries(Object.entries(userObj).filter(([_, value]) => value != ""));
+  return imBoardApi.post(`/users`, filteredObj).then((res) => {
     return res.data;
   });
 };
@@ -62,4 +64,14 @@ export const postMessage = (session_id, author_name, message_body) => {
     .then((res) => {
       return res.data.message;
     });
+};
+
+export const getGamesByUsername = (username) => {
+  return imBoardApi
+    .get(`/users/${username}/games`)
+    .then((games) => games.data.games);
+};
+
+export const postGameByUsername = (username, game) => {
+  return imBoardApi.post(`/users/${username}/games`, game).then(() => {});
 };
