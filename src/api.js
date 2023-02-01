@@ -18,7 +18,7 @@ export const getUser = (nickname) => {
 
 export const patchUser = (userObj) => {
   const filteredObj = Object.fromEntries(
-    Object.entries(userObj).filter(([_, value]) => value != "")
+    Object.entries(userObj).filter(([_, value]) => value !== "")
   );
   return imBoardApi
     .patch(`/users/${filteredObj.username}`, filteredObj)
@@ -29,7 +29,7 @@ export const patchUser = (userObj) => {
 
 export const postUser = (userObj) => {
   const filteredObj = Object.fromEntries(
-    Object.entries(userObj).filter(([_, value]) => value != "")
+    Object.entries(userObj).filter(([_, value]) => value !== "")
   );
   return imBoardApi.post(`/users`, filteredObj).then((res) => {
     return res.data;

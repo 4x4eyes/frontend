@@ -27,7 +27,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
   });
   const [userExists, setUserExists] = useState(false);
   const [error, setError] = useState("");
-  const [game, setGame] = useState({ game_name: "", category_id: null });
+  const [game, setGame] = useState({ game_name: "", category_id: "1" });
   const [currentGames, setCurrentGames] = useState([]);
 
   useEffect(() => {
@@ -88,11 +88,15 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
         <form
           className="postGames__form"
           onSubmit={(e) => {
-            console.log(game);
             e.preventDefault();
             postGameByUsername(user.nickname, game)
-              .then(() => {})
-              .catch((e) => console.log(e));
+              .then(() => {
+                getGamesByUsername(user.nickname).then((games) => setCurrentGames(games))
+              })
+              .catch((e) => {
+                getGamesByUsername(user.nickname).then((games) => setCurrentGames(games))
+                setError("something went wrong, please try again")
+              });
           }}>
           <label for="game_name">Game Title</label>
           <input
@@ -144,7 +148,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
               Co-op
             </option>
           </select>
-          <button type="submit">Add</button>
+          <button className="addGame" type="submit" disabled={game.game_name.length < 2}>Add</button>
         </form>
       </div>
       <br></br>
@@ -154,7 +158,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
             return (
               <li key={game.user_game_id}>
                 <p>Title: {game.game_name}</p>
-                <p>Category: {game.category_slug}</p>
+                <p className="category__slug">Category: {game.category_slug.replaceAll("-", " ")}</p>
               </li>
             );
           })}
