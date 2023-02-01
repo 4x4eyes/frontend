@@ -70,7 +70,7 @@ export const IndividualSession = ({ user }) => {
   return (
     <div>
       <h3>
-        your conversation with{" "}
+        Your conversation with{" "}
         {user.nickname === session.user_a_name
           ? session.user_b_name
           : session.user_a_name}
@@ -79,15 +79,24 @@ export const IndividualSession = ({ user }) => {
       {loadingMessages ? (
         "Loading"
       ) : (
-        <ul>
+        <ul className="message__item">
           {messages.map((message) => {
             return (
-              <li key={message.message_id}>
-                {message.author_name}:{" "}
-                {message.created_at
-                  .replaceAll("T", " ")
-                  .replaceAll("Z", "")
-                  .slice(0, -7)}
+              <li
+                className={`${
+                  message.author_name === user.nickname
+                    ? "left__user"
+                    : "right__user"
+                }`}
+                key={message.message_id}
+              >
+                <b>{message.author_name}:</b>{" "}
+                <b>
+                  {message.created_at
+                    .replaceAll("T", " ")
+                    .replaceAll("Z", "")
+                    .slice(0, -7)}
+                </b>
                 <br /> {message.message_body}
               </li>
             );
@@ -95,8 +104,12 @@ export const IndividualSession = ({ user }) => {
         </ul>
       )}
 
-      <form>
+      <form className="message__form">
         <textarea
+          className="message__text__area"
+          rows="3"
+          cols="50"
+          wrap="hard"
           name="newMessage"
           id="newMessage"
           placeholder="New message ..."
@@ -106,6 +119,7 @@ export const IndividualSession = ({ user }) => {
           }}
         />
         <button
+          className="message__submit__button"
           disabled={postingMessage || newMessageText.length === 0}
           onClick={submitMessage}
         >
