@@ -28,6 +28,10 @@ td {
   text-align: right;
 }
 
+.asterisk {
+  text-align: left;
+}
+
 .profile__user__right {
   text-align: left;
 }
