@@ -325,12 +325,7 @@ button:disabled {
 }
 
 .currentGames_list {
-  padding: auto;
   margin: auto;
   height: auto;
-  padding-left: 0;
-}
-
-.game__card {
   padding-left: 0;
 }
