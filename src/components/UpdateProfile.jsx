@@ -97,7 +97,7 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
             />
           </div>
         )}
-        {isLoading && <p className="loading">submitting data..please wait</p>}
+        {isLoading && <p className="loading">Loading..please wait</p>}
         {error && <p className="error">{error}</p>}
       </div>
     </main>

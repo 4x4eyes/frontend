@@ -40,7 +40,7 @@ export default ({
             value={updatedUser[userProp]}
           />
         </td>
-        {!userExists && <td>{asterisk}</td>}
+        {userExists && <td className="asterisk" >{asterisk}</td>}
       </tr>
     );
   };
