@@ -52,13 +52,14 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
       )}
 
       <div className="currentGames">
+        <h4>Favourite Games</h4>
         <ul className="currentGames_list">
           {currentGames.map((game) => {
             return (
-              <li key={game.user_game_id}>
-                <p>Title: {game.game_name}</p>
+              <li className="game__card" key={game.user_game_id}>
                 <p className="category__slug">
-                  Category: {game.category_slug.replaceAll("-", " ")}
+                  <b>Game:</b> {game.game_name} | <b>Category:</b>{" "}
+                  {game.category_slug.replaceAll("-", " ")}
                 </p>
               </li>
             );
@@ -74,19 +75,18 @@ const UpdateProfile = ({ user, dbUser, setDbUser }) => {
 
         {!isLoading && (
           <div>
-            <div className="profile__form__static">
-              <label>Username: {user.nickname}</label>
-              <br />
-              <label>Email: {user.email}</label>
-              <br />
+            <table className="profile__form__static">
+              <tr> <td className="profile__user__left" >Username:</td> <td className="profile__user__right" >{user.nickname}</td></tr>
+       
+              <tr> <td className="profile__user__left" >Email:</td> <td className="profile__user__right">{user.email}</td></tr>
+             
               {userExists && (
-                <div>
-                  <label>Date of Birth: {dbUser.dob}</label>
-                  <br />
-                </div>
+                <tr>
+                  <td className="profile__user__left" >Date of Birth:</td> <td className="profile__user__right"> {dbUser.dob}</td>
+                </tr>
               )}
               <br />
-            </div>
+            </table>
             <ProfileForm
               setError={setError}
               setIsLoading={setIsLoading}
