@@ -23,13 +23,8 @@ function App() {
       />
       {isAuthenticated ? (
         <div>
-          {dbUser.username ? <Nav /> : null}
-          <Profile
-            className="profile-container"
-            user={user}
-            isAuthenticated={isAuthenticated}
-            isAuth0Loading={isAuth0Loading}
-          />
+          {dbUser.username ? <Nav user={user} isAuthenticated={isAuthenticated} isAuth0Loading={isAuth0Loading}/> : null}
+          
           <main>
             <Routes>
               <Route path="/messages" element={<SessionsList user={user} />} />
