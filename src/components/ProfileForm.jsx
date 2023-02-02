@@ -26,22 +26,22 @@ export default ({
   });
   const [age, setAge] = useState(0);
 
-  const InputField = ({ userProp, display }) => {
+  const inputField = (userProp, display, asterisk) => {
     return (
-      <div className="profile_form_field">
-        <label htmlFor={userProp} className="profile__form__label">
-          {display}
-        </label>
-        <input
-          className="profile__form__input"
-          type="text"
-          onChange={handleUpdatedUser(userProp)}
-          id={userProp}
-          name={userProp}
-          placeholder={dbUser[userProp]}
-          value={updatedUser[userProp]}
-        />
-      </div>
+      <tr className="profile_form_field">
+        <td className="profile__form__label">{display}</td>
+        <td className="profile__form__input">
+          <input
+            type="text"
+            onChange={handleUpdatedUser(userProp)}
+            id={userProp}
+            name={userProp}
+            placeholder={dbUser[userProp]}
+            value={updatedUser[userProp]}
+          />
+        </td>
+        {!userExists && <td>{asterisk}</td>}
+      </tr>
     );
   };
 
@@ -89,7 +89,6 @@ export default ({
       setUpdatedUser((currentUser) => {
         const temp = { ...currentUser };
         temp[field] = e.target.value;
-        console.log(temp);
         return temp;
       });
     };
@@ -97,40 +96,42 @@ export default ({
 
   return (
     <form className="profile__form" onSubmit={handleSubmit}>
-      <InputField userProp="first_name" display="Last Name:* " />
-      <InputField userProp="last_name" display="Last Name:* " />
-      {!userExists && (
-        <div>
-          <label className="profile__form__label">Date of Birth: **</label>
-          <input
-            type="date"
-            onChange={handleUpdatedUser("dob")}
-            name="dob"
-            placeholder={dbUser.dob}
-            value={updatedUser.dob}
-          />
-          <br />
-        </div>
-      )}
-      <InputField userProp="avatar_url" display="Avatar URL: " />
-      <InputField userProp="phone_number" display="Contact Number:* " />
-      <InputField userProp="street_address" display="Street Address: " />
-      <InputField userProp="city" display="City:* " />
-      <InputField userProp="postcode" display="Postcode: " />
-      <InputField userProp="county" display="County: " />
-      <InputField userProp="country" display="Country:* " />
-      <InputField userProp="distance_radius" display="Distance Radius (km): " />
+      <table className="profile__inout__table">
+        {inputField("first_name", "First Name: ", "*")}
+        {inputField("last_name", "Last Name: ", "*")}
+        {userExists && (
+          <tr className="profile_form_field">
+            <td className="profile__form__label">Date of Birth: **</td>
+            <td className="profile__form__input">
+              <input
+                type="date"
+                onChange={handleUpdatedUser("dob")}
+                name="dob"
+                placeholder={dbUser.dob}
+                value={updatedUser.dob}
+              />
+            </td>
+          </tr>
+        )}
+        {inputField("avatar_url", "Avatar URL: ")}
+        {inputField("phone_number", "Contact Number: ", "*")}
+        {inputField("street_address", "Street Address: ")}
+        {inputField("city", "City: ", "*")}
+        {inputField("postcode", "Postcode: ")}
+        {inputField("county", "County: ")}
+        {inputField("country", "Country: ", "*")}
+        {inputField("distance_radius", "Distance Radius (km): ")}
+      </table>
       <br />
       <button
         className="profile__form__submit"
         type="submit"
-        disabled={!userExists && age < 18}
-      >
+        disabled={!userExists && age < 18}>
         Submit information
       </button>
       {!userExists && age < 18 && ` Must be 18+ to use I'm Board`}
       <br />
-      *: Required
+      {!userExists && "*: Required "}
     </form>
   );
 };
