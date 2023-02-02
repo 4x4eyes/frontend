@@ -330,3 +330,7 @@ button:disabled {
   height: auto;
   padding-left: 0;
 }
+
+.game__card {
+  padding-left: 0;
+}
