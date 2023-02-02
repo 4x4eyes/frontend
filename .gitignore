@@ -1,3 +1,5 @@
 node_modules
 scrap.txt
 .env
+# Local Netlify folder
+.netlify
