@@ -93,6 +93,11 @@ h1 {
 .profile__username {
   font-size: 1em;
 }
+
+.matches ul {
+  padding-left: 0;
+}
+
 .matches__match__li__games {
   border: 2px #d79643 solid;
   margin: 20px;
