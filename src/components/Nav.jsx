@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function Nav({isAuthenticated, user}) {
+export default function Nav({ isAuthenticated, user }) {
+  const { logout } = useAuth0();
+
   return (
     <div className="navbar">
       <Link className="navbar__link" to="/find-matches">
@@ -12,21 +13,19 @@ export default function Nav({isAuthenticated, user}) {
       <Link className="navbar__link" to="/messages">
         <p>Messages</p>
       </Link>
-      { isAuthenticated ? (
-    <div className="profile">
-      <div className="profile__body">
-        <h2 className="profile__username">{user.nickname}</h2>
-        <Link className="profile__updateProfile" to={`/`}>
-          <button className="profile__updateProfile__button">
-            Update Profile
-          </button>
-        </Link>
-        <LogoutButton />
-      </div>
-    </div>
-  ) : (
-    <LoginButton />
-  )}
+      <p>|</p>
+      <Link className="navbar__link" to="/">
+        <p>Profile ({user.nickname})</p>
+      </Link>
+      <p>|</p>
+      <Link
+        className="navbar__link"
+        onClick={() =>
+          logout({ logoutParams: { returnTo: window.location.origin } })
+        }
+      >
+        <p>Log Out</p>
+      </Link>
     </div>
   );
 }
