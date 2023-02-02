@@ -7,7 +7,6 @@ import { IndividualSession } from "./components/IndividualSession";
 import { SessionsList } from "./components/SessionsList";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./components/LoginButton";
-import Profile from "./components/Profile";
 import { useState } from "react";
 
 function App() {
