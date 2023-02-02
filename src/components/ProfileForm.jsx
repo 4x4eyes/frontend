@@ -99,7 +99,7 @@ export default ({
       <table className="profile__inout__table">
         {inputField("first_name", "First Name: ", "*")}
         {inputField("last_name", "Last Name: ", "*")}
-        {userExists && (
+        {!userExists && (
           <tr className="profile_form_field">
             <td className="profile__form__label">Date of Birth: **</td>
             <td className="profile__form__input">
